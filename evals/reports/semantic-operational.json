@@ -1,0 +1,42 @@
+{
+  "source_sha256": "8f7ed8ba9b344d4db0584d8a889d9d928766496d40c26d70fcd01e187f58d150",
+  "index": {
+    "provider": "openai",
+    "model": "text-embedding-v4",
+    "dimensions": 1024,
+    "endpoint_sha256": "5891aed827c4e67b2d7c0c73ea819327ce3f2b6ef72213cd79669486a26b1ead",
+    "index_version": "ba171e095593cbbe914b10b9",
+    "corpus_sha256": "3f215f55c211965837dc4f7b947c4bcb363ce0b8a2746304a9ca4ce857a9721f",
+    "document_count": 48,
+    "table": "rag_knowledge_ba171e095593cbbe914b10b9"
+  },
+  "index_storage": {
+    "documents": 48,
+    "min_dimensions": 1024,
+    "max_dimensions": 1024
+  },
+  "old_hash_table_preserved": true,
+  "index_build_tokens": 1695,
+  "bootstrap_reuse": {
+    "provider": "openai",
+    "model": "text-embedding-v4",
+    "dimensions": 1024,
+    "endpoint_sha256": "5891aed827c4e67b2d7c0c73ea819327ce3f2b6ef72213cd79669486a26b1ead",
+    "index_version": "ba171e095593cbbe914b10b9",
+    "corpus_sha256": "3f215f55c211965837dc4f7b947c4bcb363ce0b8a2746304a9ca4ce857a9721f",
+    "document_count": 48,
+    "table": "rag_knowledge_ba171e095593cbbe914b10b9",
+    "created": false,
+    "embedding_tokens": 0
+  },
+  "chat_model": "qwen3.8-max",
+  "real_llm_enabled": true,
+  "image_contains_dotenv": false,
+  "cache_check": {
+    "cold_ms": 392.1,
+    "warm_ms": 0.2,
+    "cold_tokens": 14,
+    "warm_tokens": 0,
+    "same_results": true
+  }
+}

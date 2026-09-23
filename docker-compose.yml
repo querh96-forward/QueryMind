@@ -1,0 +1,138 @@
+name: querymind
+
+x-app-environment: &app-environment
+  PYTHONPATH: /app
+  DATABASE_URL: postgresql+psycopg://querymind:${POSTGRES_PASSWORD:-querymind}@postgres:5432/querymind
+  BUSINESS_DATABASE_URL: postgresql+psycopg://northwind_reader:${NORTHWIND_READER_PASSWORD:-northwind_reader}@postgres:5432/querymind
+  NORTHWIND_READER_PASSWORD: ${NORTHWIND_READER_PASSWORD:-northwind_reader}
+  REDIS_URL: redis://redis:6379/0
+  WEB_MCP_URL: http://web-mcp:8011/mcp
+  LLM_API_KEY: ${LLM_API_KEY:-${DASHSCOPE_API_KEY:-}}
+  LLM_BASE_URL: ${LLM_BASE_URL:-${DASHSCOPE_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}}
+  LLM_MODEL: ${LLM_MODEL:-qwen-plus}
+  MOCK_LLM: ${MOCK_LLM:-false}
+  EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-openai}
+  EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+  EMBEDDING_BASE_URL: ${EMBEDDING_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}
+  EMBEDDING_MODEL: ${EMBEDDING_MODEL:-text-embedding-v4}
+  EMBEDDING_DIMENSIONS: ${EMBEDDING_DIMENSIONS:-1024}
+  EMBEDDING_TIMEOUT_SECONDS: ${EMBEDDING_TIMEOUT_SECONDS:-30}
+  EMBEDDING_BATCH_SIZE: ${EMBEDDING_BATCH_SIZE:-10}
+  RAG_TOP_K: ${RAG_TOP_K:-5}
+  RAG_CACHE_SECONDS: ${RAG_CACHE_SECONDS:-300}
+  TAVILY_API_KEY: ${TAVILY_API_KEY:-}
+  DEFAULT_TOKEN_BUDGET: ${DEFAULT_TOKEN_BUDGET:-20000}
+  MAX_AGENT_LOOPS: ${MAX_AGENT_LOOPS:-5}
+  MAX_TOOL_CALLS: ${MAX_TOOL_CALLS:-8}
+  MAX_RUNTIME_SECONDS: ${MAX_RUNTIME_SECONDS:-90}
+  MAX_SQL_REPAIRS: ${MAX_SQL_REPAIRS:-2}
+  INPUT_COST_PER_MILLION: ${INPUT_COST_PER_MILLION:-0.8}
+  OUTPUT_COST_PER_MILLION: ${OUTPUT_COST_PER_MILLION:-2.0}
+  EMBEDDING_COST_PER_MILLION: ${EMBEDDING_COST_PER_MILLION:-0.1}
+
+
+x-app-base: &app-base
+  build: .
+  image: querymind-app:6.2.0
+  environment: *app-environment
+
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: querymind
+      POSTGRES_USER: querymind
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-querymind}
+    volumes:
+      - querymind_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U querymind -d querymind"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - querymind_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+
+  bootstrap:
+    <<: *app-base
+    command: ["python", "-m", "scripts.bootstrap"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: "no"
+
+  web-mcp:
+    <<: *app-base
+    command: ["python", "-m", "app.entrypoints.web_search_mcp"]
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  worker:
+    <<: *app-base
+    command: ["python", "-m", "app.entrypoints.worker"]
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      web-mcp:
+        condition: service_started
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import time,redis,os; r=redis.Redis.from_url(os.environ['REDIS_URL'],decode_responses=True); v=r.get('querymind:worker:heartbeat'); raise SystemExit(0 if v and time.time()-float(v)<20 else 1)"
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  api:
+    <<: *app-base
+    command: ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "6006"]
+    depends_on:
+      bootstrap:
+        condition: service_completed_successfully
+      worker:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:6006:6006"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import json,urllib.request; d=json.load(urllib.request.urlopen('http://127.0.0.1:6006/api/v1/health')); raise SystemExit(0 if d.get('status')=='ok' else 1)"
+      interval: 10s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  querymind-mcp:
+    <<: *app-base
+    command: ["python", "-m", "app.entrypoints.mcp_server"]
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8010:8010"
+    restart: unless-stopped
+
+volumes:
+  querymind_postgres:
+  querymind_redis:

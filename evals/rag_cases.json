@@ -1,0 +1,50 @@
+[
+  {
+    "query": "销售额如何计算",
+    "expected_id": "metric_sales"
+  },
+  {
+    "query": "客单价的指标口径",
+    "expected_id": "metric_aov"
+  },
+  {
+    "query": "如何判断补货风险",
+    "expected_id": "metric_inventory"
+  },
+  {
+    "query": "运费为什么不能在明细表直接相加",
+    "expected_id": "rule_freight"
+  },
+  {
+    "query": "客户表有哪些字段",
+    "expected_id": "schema_customers"
+  },
+  {
+    "query": "订单汇总分析视图",
+    "expected_id": "view_v_order_summary"
+  },
+  {
+    "query": "商品销售额排名SQL示例",
+    "expected_id": "fewshot_top_products"
+  },
+  {
+    "query": "不同国家销售额查询例子",
+    "expected_id": "fewshot_country"
+  },
+  {
+    "query": "利润能不能直接计算",
+    "expected_id": "rule_profit"
+  },
+  {
+    "query": "折扣率0.1是什么意思",
+    "expected_id": "rule_discount"
+  },
+  {
+    "query": "按期发货率定义",
+    "expected_id": "metric_on_time"
+  },
+  {
+    "query": "销售员工来自哪张表",
+    "expected_id": "schema_employees"
+  }
+]

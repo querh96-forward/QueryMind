@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QueryMind</title>
+  <link rel="stylesheet" href="/static/styles.css?v=8" />
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand-row">
+      <div class="brand-mark">Q</div>
+      <div><strong>QueryMind</strong><small>企业数据智能分析</small></div>
+      <button class="icon-btn mobile-only" id="closeSidebar" aria-label="关闭菜单">×</button>
+    </div>
+    <button class="new-chat" id="newThread">＋ 新建分析</button>
+    <nav class="main-nav">
+      <button class="nav-item active" data-view="chat"><span>⌁</span>智能分析</button>
+      <button class="nav-item" data-view="business"><span>▦</span>经营看板</button>
+      <button class="nav-item" data-view="system"><span>◴</span>系统表现</button>
+      <button class="nav-item" data-view="source"><span>◫</span>数据源</button>
+      <button class="nav-item" data-view="metrics"><span>≡</span>指标口径</button>
+      <button class="nav-item" data-view="settings"><span>⚙</span>设置</button>
+    </nav>
+    <div class="thread-head"><span>最近对话</span><button id="refreshThreads" class="tiny-btn">刷新</button></div>
+    <div id="threadList" class="thread-list"></div>
+    <div class="sidebar-foot">
+      <span class="status-dot"></span>
+      <div><strong>Northwind贸易数据</strong><small id="dataStatus">连接正常</small></div>
+    </div>
+  </aside>
+
+  <main class="workspace">
+    <header class="topbar">
+      <button class="icon-btn" id="toggleSidebar" aria-label="切换侧栏">☰</button>
+      <div class="top-actions">
+        <button class="source-pill" data-view-link="source">Northwind贸易数据 <span class="online-dot"></span></button>
+        <button class="token-pill" id="tokenPill">本次用量 0 / 20,000 Token</button>
+      </div>
+    </header>
+
+    <section id="view-chat" class="view active">
+      <div id="chatArea" class="chat-area">
+        <div id="welcome" class="welcome">
+          <div class="welcome-icon">Q</div>
+          <h1>从经营问题开始</h1>
+          <p>查询订单、客户、商品、库存与履约数据，直接获得结论、图表和明细。</p>
+          <div class="suggestions">
+            <button>每个月的销售额趋势如何？</button>
+            <button>销售额最高的10个商品是什么？</button>
+            <button>哪些客户贡献了最多收入？</button>
+            <button>目前有哪些商品存在补货风险？</button>
+          </div>
+        </div>
+        <div id="messages" class="messages"></div>
+      </div>
+      <div class="composer-wrap">
+        <div id="progressText" class="progress-text"></div>
+        <form id="composer" class="composer">
+          <textarea id="questionInput" rows="1" placeholder="向 Northwind 贸易经营数据提问……"></textarea>
+          <button type="submit" id="sendButton">发送</button>
+        </form>
+        <div class="composer-meta">
+          <span>Enter发送 · Shift+Enter换行</span>
+          <span>单次预算 <button id="budgetInline">20,000 Token</button></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-business" class="view content-view">
+      <div class="section-heading"><div><h1>经营看板</h1><p>Northwind订单、客户、商品与履约概览</p></div><button class="secondary-btn" id="refreshBusiness">刷新数据</button></div>
+      <div id="businessCards" class="metric-grid four"></div>
+      <div class="chart-grid">
+        <article class="panel wide"><div class="panel-title">月度销售趋势</div><div id="monthlyChart" class="chart"></div></article>
+        <article class="panel"><div class="panel-title">品类销售贡献</div><div id="categoryChart" class="chart"></div></article>
+        <article class="panel"><div class="panel-title">主要销售国家</div><div id="countryChart" class="chart"></div></article>
+      </div>
+    </section>
+
+    <section id="view-system" class="view content-view">
+      <div class="section-heading"><div><h1>系统表现</h1><p>线上真实运行指标与离线评测结果分开展示</p></div><select id="metricDays"><option value="7">最近7天</option><option value="30" selected>最近30天</option><option value="90">最近90天</option></select></div>
+      <div id="systemCards" class="metric-grid four"></div>
+      <div class="chart-grid">
+        <article class="panel wide"><div class="panel-title">请求与Token趋势</div><div id="systemTrendChart" class="chart"></div></article>
+        <article class="panel"><div class="panel-title">Token与成本</div><div id="costSummary" class="summary-list"></div></article>
+        <article class="panel"><div class="panel-title">离线评测</div><div id="evalSummary" class="summary-list"></div></article>
+      </div>
+      <p class="notice">结果正确率来自固定评测集的查询结果比较；执行检查通过不代表业务答案正确。</p>
+    </section>
+
+    <section id="view-source" class="view content-view">
+      <div class="section-heading"><div><h1>数据源</h1><p>当前版本只保留一套清晰、易学习的内置业务数据</p></div></div>
+      <div id="sourceCard" class="source-card"></div>
+      <article class="panel"><div class="panel-title">数据表与分析视图</div><div id="tableCatalog" class="catalog-grid"></div></article>
+    </section>
+
+    <section id="view-metrics" class="view content-view">
+      <div class="section-heading"><div><h1>指标口径</h1><p>统一定义业务指标，避免模型自由解释</p></div></div>
+      <div id="metricDefinitions" class="definition-list"></div>
+    </section>
+
+    <section id="view-settings" class="view content-view">
+      <div class="section-heading"><div><h1>设置</h1><p>只保留业务用户需要理解的成本与偏好设置</p></div></div>
+      <div class="settings-grid">
+        <article class="panel">
+          <div class="panel-title">Token预算</div>
+          <label>单次分析上限<input id="budgetInput" type="number" min="2000" max="100000" step="1000" /></label>
+          <p class="muted">达到上限后停止继续循环，并基于已有证据生成当前最佳回答。</p>
+          <button class="primary-btn" id="saveSettings">保存设置</button>
+        </article>
+        <article class="panel">
+          <div class="panel-title">已记住的偏好</div>
+          <div id="memoryList" class="memory-list"></div>
+          <p class="muted">系统只保存“以后默认用折线图”等明确长期偏好，可随时删除。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="tokenModal">
+  <div class="modal">
+    <div class="modal-head"><strong>本次Token与费用</strong><button class="icon-btn" data-close-modal>×</button></div>
+    <div id="tokenDetails" class="summary-list"></div>
+    <p class="muted">费用根据.env中的单价配置估算，不代表模型供应商最终账单。</p>
+  </div>
+</div>
+
+<script src="/static/app.js?v=8"></script>
+</body>
+</html>

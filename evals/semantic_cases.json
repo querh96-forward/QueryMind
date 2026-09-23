@@ -1,0 +1,22 @@
+[
+  {"id":"semantic_01","query":"每成交一笔生意，顾客平均付了多少钱，这个数怎么算？","expected_id":"metric_aov"},
+  {"id":"semantic_02","query":"不考虑给买家的优惠，按标价卖掉这些货本来该收多少钱？","expected_id":"metric_gross"},
+  {"id":"semantic_03","query":"一共给买家让利了多少钱，应该用什么公式？","expected_id":"metric_discount"},
+  {"id":"semantic_04","query":"一张单子里有多种商品，数交易笔数时怎么不重复算？","expected_id":"metric_orders"},
+  {"id":"semantic_05","query":"顾客下单到仓库把货发走，通常隔了多少天？","expected_id":"metric_shipping"},
+  {"id":"semantic_06","query":"已经寄出去的货，有多大比例没超过承诺的发出日期？","expected_id":"metric_on_time"},
+  {"id":"semantic_07","query":"寄送这些货花的钱占成交金额的比例怎么算？","expected_id":"metric_freight"},
+  {"id":"semantic_08","query":"哪些还在卖的货快卖光了，需要尽快进一批？","expected_id":"metric_inventory"},
+  {"id":"semantic_09","query":"能不能用这个库算扣掉进货成本之后究竟赚了多少？","expected_id":"rule_profit"},
+  {"id":"semantic_10","query":"想看去年某一天仓库还剩多少件，这个库能支持吗？","expected_id":"rule_inventory"},
+  {"id":"semantic_11","query":"把一张交易拆成多条商品记录后，快递支出怎么避免被算好几遍？","expected_id":"rule_freight"},
+  {"id":"semantic_12","query":"收货地址所在国家和买家登记的国家不同，统计地区业绩应该选哪个？","expected_id":"rule_country"},
+  {"id":"semantic_13","query":"图表上的这些数额，我能直接在后面加上美元符号吗？","expected_id":"rule_currency"},
+  {"id":"semantic_14","query":"想剔除被撤销的交易再分析，库里有没有这样的标记？","expected_id":"rule_cancel"},
+  {"id":"semantic_15","query":"销售人员的工资和奖金能从这个样例库里查出来吗？","expected_id":"rule_employee"},
+  {"id":"semantic_16","query":"这个演示数据究竟是哪几年的交易？","expected_id":"rule_date"},
+  {"id":"semantic_17","query":"负责把货送出去的公司，其联系电话保存在什么表？","expected_id":"schema_shippers"},
+  {"id":"semantic_18","query":"我想找进货合作方的公司名称和所在城市，该查哪个表？","expected_id":"schema_suppliers"},
+  {"id":"semantic_19","query":"有没有一行对应一笔交易、已经汇总好货款和件数的视图？","expected_id":"view_v_order_summary"},
+  {"id":"semantic_20","query":"报表中买家的名字应该显示公司名称还是那串编码？","expected_id":"rule_customer"}
+]

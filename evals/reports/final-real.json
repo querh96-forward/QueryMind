@@ -1,0 +1,1707 @@
+{
+  "dataset": "portfolio_cases / all / real_api",
+  "mode": "real_api",
+  "model": "qwen3.8-max",
+  "created_at": "2026-09-18T15:28:07.021055+00:00",
+  "case_count": 24,
+  "dataset_sha256": "877a23998ef3a0b45f410b4a3b3e9e800d8321baaa6dfa194c5380b760ccb208",
+  "git_revision": "unavailable",
+  "source_sha256": "4bc078d705c829b5018804794bf0e27a9ca754e5661874018413260e28237a87",
+  "complete": true,
+  "limits": {
+    "loops": 5,
+    "tools": 8,
+    "sql_repairs": 2,
+    "tokens": 20000,
+    "runtime_seconds": 90,
+    "eval_timeout_seconds": 180
+  },
+  "metric_scope": "SQL result-table correctness; narrative correctness is not graded",
+  "latency_scope": "submission through terminal status, including queue and polling",
+  "cases": [
+    {
+      "id": "portfolio_01",
+      "question": "列出来自Germany的客户，返回客户ID、客户名称两列，按客户ID升序。",
+      "category": "filter",
+      "split": "development",
+      "run_id": "b48285b0-79e3-42e9-8cad-f140c94e6758",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 7193.59,
+      "worker_latency_ms": 7005.38,
+      "total_tokens": 5259,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT customer_id AS 客户ID, company_name AS 客户名称 FROM customers WHERE country = 'Germany' ORDER BY customer_id ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "客户id": "ALFKI",
+          "客户名称": "Alfreds Futterkiste"
+        },
+        {
+          "客户id": "BLAUS",
+          "客户名称": "Blauer See Delikatessen"
+        },
+        {
+          "客户id": "DRACD",
+          "客户名称": "Drachenblut Delikatessen"
+        },
+        {
+          "客户id": "FRANK",
+          "客户名称": "Frankenversand"
+        },
+        {
+          "客户id": "KOENE",
+          "客户名称": "Königlich Essen"
+        },
+        {
+          "客户id": "LEHMS",
+          "客户名称": "Lehmanns Marktstand"
+        },
+        {
+          "客户id": "MORGK",
+          "客户名称": "Morgenstern Gesundkost"
+        },
+        {
+          "客户id": "OTTIK",
+          "客户名称": "Ottilies Käseladen"
+        },
+        {
+          "客户id": "QUICK",
+          "客户名称": "QUICK-Stop"
+        },
+        {
+          "客户id": "TOMSP",
+          "客户名称": "Toms Spezialitäten"
+        },
+        {
+          "客户id": "WANDK",
+          "客户名称": "Die Wandernde Kuh"
+        }
+      ],
+      "actual_rows": [
+        {
+          "客户id": "ALFKI",
+          "客户名称": "Alfreds Futterkiste"
+        },
+        {
+          "客户id": "BLAUS",
+          "客户名称": "Blauer See Delikatessen"
+        },
+        {
+          "客户id": "DRACD",
+          "客户名称": "Drachenblut Delikatessen"
+        },
+        {
+          "客户id": "FRANK",
+          "客户名称": "Frankenversand"
+        },
+        {
+          "客户id": "KOENE",
+          "客户名称": "Königlich Essen"
+        },
+        {
+          "客户id": "LEHMS",
+          "客户名称": "Lehmanns Marktstand"
+        },
+        {
+          "客户id": "MORGK",
+          "客户名称": "Morgenstern Gesundkost"
+        },
+        {
+          "客户id": "OTTIK",
+          "客户名称": "Ottilies Käseladen"
+        },
+        {
+          "客户id": "QUICK",
+          "客户名称": "QUICK-Stop"
+        },
+        {
+          "客户id": "TOMSP",
+          "客户名称": "Toms Spezialitäten"
+        },
+        {
+          "客户id": "WANDK",
+          "客户名称": "Die Wandernde Kuh"
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_02",
+      "question": "列出已停产商品，返回商品ID、商品名称两列，按商品ID升序。",
+      "category": "filter",
+      "split": "development",
+      "run_id": "82b23010-8462-4f1b-9143-2cbb752d796b",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 6394.23,
+      "worker_latency_ms": 6300.79,
+      "total_tokens": 5196,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT product_id AS 商品ID, product_name AS 商品名称 FROM products WHERE discontinued = TRUE ORDER BY product_id ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "商品id": 5,
+          "商品名称": "Chef Anton's Gumbo Mix"
+        },
+        {
+          "商品id": 9,
+          "商品名称": "Mishi Kobe Niku"
+        },
+        {
+          "商品id": 17,
+          "商品名称": "Alice Mutton"
+        },
+        {
+          "商品id": 24,
+          "商品名称": "Guaraná Fantástica"
+        },
+        {
+          "商品id": 28,
+          "商品名称": "Rössle Sauerkraut"
+        },
+        {
+          "商品id": 29,
+          "商品名称": "Thüringer Rostbratwurst"
+        },
+        {
+          "商品id": 42,
+          "商品名称": "Singaporean Hokkien Fried Mee"
+        },
+        {
+          "商品id": 53,
+          "商品名称": "Perth Pasties"
+        }
+      ],
+      "actual_rows": [
+        {
+          "商品id": 5,
+          "商品名称": "Chef Anton's Gumbo Mix"
+        },
+        {
+          "商品id": 9,
+          "商品名称": "Mishi Kobe Niku"
+        },
+        {
+          "商品id": 17,
+          "商品名称": "Alice Mutton"
+        },
+        {
+          "商品id": 24,
+          "商品名称": "Guaraná Fantástica"
+        },
+        {
+          "商品id": 28,
+          "商品名称": "Rössle Sauerkraut"
+        },
+        {
+          "商品id": 29,
+          "商品名称": "Thüringer Rostbratwurst"
+        },
+        {
+          "商品id": 42,
+          "商品名称": "Singaporean Hokkien Fried Mee"
+        },
+        {
+          "商品id": 53,
+          "商品名称": "Perth Pasties"
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_03",
+      "question": "列出库存为0的商品，返回商品ID、商品名称、库存三列，按商品ID升序。",
+      "category": "filter",
+      "split": "development",
+      "run_id": "de5d67bb-1ff8-4e4b-9074-956cf367f12e",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 7613.71,
+      "worker_latency_ms": 7497.51,
+      "total_tokens": 5294,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT product_id AS 商品ID, product_name AS 商品名称, units_in_stock AS 库存 FROM v_inventory_status WHERE units_in_stock = 0 ORDER BY product_id ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "商品id": 5,
+          "商品名称": "Chef Anton's Gumbo Mix",
+          "库存": 0
+        },
+        {
+          "商品id": 17,
+          "商品名称": "Alice Mutton",
+          "库存": 0
+        },
+        {
+          "商品id": 29,
+          "商品名称": "Thüringer Rostbratwurst",
+          "库存": 0
+        },
+        {
+          "商品id": 31,
+          "商品名称": "Gorgonzola Telino",
+          "库存": 0
+        },
+        {
+          "商品id": 53,
+          "商品名称": "Perth Pasties",
+          "库存": 0
+        }
+      ],
+      "actual_rows": [
+        {
+          "商品id": 5,
+          "商品名称": "Chef Anton's Gumbo Mix",
+          "库存": 0
+        },
+        {
+          "商品id": 17,
+          "商品名称": "Alice Mutton",
+          "库存": 0
+        },
+        {
+          "商品id": 29,
+          "商品名称": "Thüringer Rostbratwurst",
+          "库存": 0
+        },
+        {
+          "商品id": 31,
+          "商品名称": "Gorgonzola Telino",
+          "库存": 0
+        },
+        {
+          "商品id": 53,
+          "商品名称": "Perth Pasties",
+          "库存": 0
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_04",
+      "question": "列出来自UK的客户，返回客户ID、客户名称两列，按客户ID升序。",
+      "category": "filter",
+      "split": "heldout",
+      "run_id": "772bb957-0029-4f42-a97e-8befc88066b9",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 6818.11,
+      "worker_latency_ms": 6592.85,
+      "total_tokens": 5120,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT customer_id AS 客户ID, company_name AS 客户名称 FROM customers WHERE country = 'UK' ORDER BY customer_id ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "客户id": "AROUT",
+          "客户名称": "Around the Horn"
+        },
+        {
+          "客户id": "BSBEV",
+          "客户名称": "B's Beverages"
+        },
+        {
+          "客户id": "CONSH",
+          "客户名称": "Consolidated Holdings"
+        },
+        {
+          "客户id": "EASTC",
+          "客户名称": "Eastern Connection"
+        },
+        {
+          "客户id": "ISLAT",
+          "客户名称": "Island Trading"
+        },
+        {
+          "客户id": "NORTS",
+          "客户名称": "North/South"
+        },
+        {
+          "客户id": "SEVES",
+          "客户名称": "Seven Seas Imports"
+        }
+      ],
+      "actual_rows": [
+        {
+          "客户id": "AROUT",
+          "客户名称": "Around the Horn"
+        },
+        {
+          "客户id": "BSBEV",
+          "客户名称": "B's Beverages"
+        },
+        {
+          "客户id": "CONSH",
+          "客户名称": "Consolidated Holdings"
+        },
+        {
+          "客户id": "EASTC",
+          "客户名称": "Eastern Connection"
+        },
+        {
+          "客户id": "ISLAT",
+          "客户名称": "Island Trading"
+        },
+        {
+          "客户id": "NORTS",
+          "客户名称": "North/South"
+        },
+        {
+          "客户id": "SEVES",
+          "客户名称": "Seven Seas Imports"
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_05",
+      "question": "数据库中一共有多少订单？只返回订单量一列。",
+      "category": "aggregation",
+      "split": "development",
+      "run_id": "41fd957d-8ab6-453e-af5c-b874abe246cf",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 4972.58,
+      "worker_latency_ms": 4833.68,
+      "total_tokens": 4785,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT COUNT(DISTINCT order_id) AS 订单量 FROM orders LIMIT 200",
+      "expected_rows": [
+        {
+          "订单量": 830
+        }
+      ],
+      "actual_rows": [
+        {
+          "订单量": 830
+        }
+      ],
+      "comparison": {
+        "ordered": false,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_06",
+      "question": "各国家分别有多少客户？返回国家、客户数两列，不要求排序。",
+      "category": "aggregation",
+      "split": "development",
+      "run_id": "b5c4ebd6-8dd3-4fed-afbc-25f66ddbb0a5",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 12196.17,
+      "worker_latency_ms": 12041.29,
+      "total_tokens": 5651,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT country AS 国家, COUNT(*) AS 客户数 FROM customers GROUP BY country LIMIT 200",
+      "expected_rows": [
+        {
+          "国家": null,
+          "客户数": 2
+        },
+        {
+          "国家": "Argentina",
+          "客户数": 3
+        },
+        {
+          "国家": "Spain",
+          "客户数": 5
+        },
+        {
+          "国家": "Switzerland",
+          "客户数": 2
+        },
+        {
+          "国家": "Italy",
+          "客户数": 3
+        },
+        {
+          "国家": "Venezuela",
+          "客户数": 4
+        },
+        {
+          "国家": "Belgium",
+          "客户数": 2
+        },
+        {
+          "国家": "Norway",
+          "客户数": 1
+        },
+        {
+          "国家": "Sweden",
+          "客户数": 2
+        },
+        {
+          "国家": "USA",
+          "客户数": 13
+        },
+        {
+          "国家": "France",
+          "客户数": 11
+        },
+        {
+          "国家": "Mexico",
+          "客户数": 5
+        },
+        {
+          "国家": "Brazil",
+          "客户数": 9
+        },
+        {
+          "国家": "Austria",
+          "客户数": 2
+        },
+        {
+          "国家": "Poland",
+          "客户数": 1
+        },
+        {
+          "国家": "UK",
+          "客户数": 7
+        },
+        {
+          "国家": "Ireland",
+          "客户数": 1
+        },
+        {
+          "国家": "Germany",
+          "客户数": 11
+        },
+        {
+          "国家": "Denmark",
+          "客户数": 2
+        },
+        {
+          "国家": "Canada",
+          "客户数": 3
+        },
+        {
+          "国家": "Finland",
+          "客户数": 2
+        },
+        {
+          "国家": "Portugal",
+          "客户数": 2
+        }
+      ],
+      "actual_rows": [
+        {
+          "国家": null,
+          "客户数": 2
+        },
+        {
+          "国家": "Argentina",
+          "客户数": 3
+        },
+        {
+          "国家": "Spain",
+          "客户数": 5
+        },
+        {
+          "国家": "Switzerland",
+          "客户数": 2
+        },
+        {
+          "国家": "Italy",
+          "客户数": 3
+        },
+        {
+          "国家": "Venezuela",
+          "客户数": 4
+        },
+        {
+          "国家": "Belgium",
+          "客户数": 2
+        },
+        {
+          "国家": "Norway",
+          "客户数": 1
+        },
+        {
+          "国家": "Sweden",
+          "客户数": 2
+        },
+        {
+          "国家": "USA",
+          "客户数": 13
+        },
+        {
+          "国家": "France",
+          "客户数": 11
+        },
+        {
+          "国家": "Mexico",
+          "客户数": 5
+        },
+        {
+          "国家": "Brazil",
+          "客户数": 9
+        },
+        {
+          "国家": "Austria",
+          "客户数": 2
+        },
+        {
+          "国家": "Poland",
+          "客户数": 1
+        },
+        {
+          "国家": "UK",
+          "客户数": 7
+        },
+        {
+          "国家": "Ireland",
+          "客户数": 1
+        },
+        {
+          "国家": "Germany",
+          "客户数": 11
+        },
+        {
+          "国家": "Denmark",
+          "客户数": 2
+        },
+        {
+          "国家": "Canada",
+          "客户数": 3
+        },
+        {
+          "国家": "Finland",
+          "客户数": 2
+        },
+        {
+          "国家": "Portugal",
+          "客户数": 2
+        }
+      ],
+      "comparison": {
+        "ordered": false,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_07",
+      "question": "在v_order_summary中计算全部历史订单的折后销售额合计，保留两位小数，只返回销售额一列。",
+      "category": "aggregation",
+      "split": "development",
+      "run_id": "6e6d1405-cbae-4da1-ab03-6dba9ac80383",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 4945.09,
+      "worker_latency_ms": 4858.44,
+      "total_tokens": 5102,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT ROUND(SUM(sales_amount), 2) AS 销售额 FROM v_order_summary LIMIT 200",
+      "expected_rows": [
+        {
+          "销售额": 1265793.22
+        }
+      ],
+      "actual_rows": [
+        {
+          "销售额": 1265793.22
+        }
+      ],
+      "comparison": {
+        "ordered": false,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_08",
+      "question": "每位物流商各有多少订单？按物流商ID升序，返回物流商ID、订单量两列。",
+      "category": "aggregation",
+      "split": "heldout",
+      "run_id": "84047bd8-14ff-4dca-aff8-7693cc4ecfb7",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 9871.19,
+      "worker_latency_ms": 9828.36,
+      "total_tokens": 5287,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT s.shipper_id AS 物流商ID, COUNT(DISTINCT o.order_id) AS 订单量 FROM shippers AS s LEFT JOIN orders AS o ON o.ship_via = s.shipper_id GROUP BY s.shipper_id ORDER BY s.shipper_id ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "物流商id": 1,
+          "订单量": 249
+        },
+        {
+          "物流商id": 2,
+          "订单量": 326
+        },
+        {
+          "物流商id": 3,
+          "订单量": 255
+        }
+      ],
+      "actual_rows": [
+        {
+          "物流商id": 1,
+          "订单量": 249
+        },
+        {
+          "物流商id": 2,
+          "订单量": 326
+        },
+        {
+          "物流商id": 3,
+          "订单量": 255
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_09",
+      "question": "折后销售额最高的5个商品是什么？使用v_product_sales，返回商品、销售额两列，按销售额降序，同额时按商品名升序。",
+      "category": "ranking",
+      "split": "development",
+      "run_id": "13034727-7d18-4fd8-9970-43971bd0c4a6",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 7777.05,
+      "worker_latency_ms": 7728.17,
+      "total_tokens": 5363,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT product_name AS 商品, sales_amount AS 销售额 FROM v_product_sales ORDER BY sales_amount DESC, product_name ASC LIMIT 5",
+      "expected_rows": [
+        {
+          "商品": "Côte de Blaye",
+          "销售额": 141396.74
+        },
+        {
+          "商品": "Thüringer Rostbratwurst",
+          "销售额": 80368.67
+        },
+        {
+          "商品": "Raclette Courdavault",
+          "销售额": 71155.7
+        },
+        {
+          "商品": "Tarte au sucre",
+          "销售额": 47234.97
+        },
+        {
+          "商品": "Camembert Pierrot",
+          "销售额": 46825.48
+        }
+      ],
+      "actual_rows": [
+        {
+          "商品": "Côte de Blaye",
+          "销售额": 141396.74
+        },
+        {
+          "商品": "Thüringer Rostbratwurst",
+          "销售额": 80368.67
+        },
+        {
+          "商品": "Raclette Courdavault",
+          "销售额": 71155.7
+        },
+        {
+          "商品": "Tarte au sucre",
+          "销售额": 47234.97
+        },
+        {
+          "商品": "Camembert Pierrot",
+          "销售额": 46825.48
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_10",
+      "question": "运费最高的5笔订单，返回订单ID、运费两列，运费降序，同额按订单ID升序。",
+      "category": "ranking",
+      "split": "development",
+      "run_id": "d5bd053c-1db8-45c9-8db0-c3edc7af2098",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 7595.0,
+      "worker_latency_ms": 7549.01,
+      "total_tokens": 5283,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT order_id AS 订单ID, freight AS 运费 FROM v_order_summary ORDER BY freight DESC, order_id ASC LIMIT 5",
+      "expected_rows": [
+        {
+          "订单id": 10540,
+          "运费": 1007.64
+        },
+        {
+          "订单id": 10372,
+          "运费": 890.78
+        },
+        {
+          "订单id": 11030,
+          "运费": 830.75
+        },
+        {
+          "订单id": 10691,
+          "运费": 810.05
+        },
+        {
+          "订单id": 10514,
+          "运费": 789.95
+        }
+      ],
+      "actual_rows": [
+        {
+          "订单id": 10540,
+          "运费": 1007.64
+        },
+        {
+          "订单id": 10372,
+          "运费": 890.78
+        },
+        {
+          "订单id": 11030,
+          "运费": 830.75
+        },
+        {
+          "订单id": 10691,
+          "运费": 810.05
+        },
+        {
+          "订单id": 10514,
+          "运费": 789.95
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_11",
+      "question": "库存最多的5个商品，返回商品、库存两列，库存降序，同库存按商品名称升序。",
+      "category": "ranking",
+      "split": "development",
+      "run_id": "a1c1da52-fedc-4b9d-b258-22475e231851",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 7599.77,
+      "worker_latency_ms": 7577.31,
+      "total_tokens": 5247,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT product_name AS 商品, units_in_stock AS 库存 FROM v_inventory_status ORDER BY units_in_stock DESC, product_name ASC LIMIT 5",
+      "expected_rows": [
+        {
+          "商品": "Rhönbräu Klosterbier",
+          "库存": 125
+        },
+        {
+          "商品": "Boston Crab Meat",
+          "库存": 123
+        },
+        {
+          "商品": "Grandma's Boysenberry Spread",
+          "库存": 120
+        },
+        {
+          "商品": "Pâté chinois",
+          "库存": 115
+        },
+        {
+          "商品": "Sirop d'érable",
+          "库存": 113
+        }
+      ],
+      "actual_rows": [
+        {
+          "商品": "Rhönbräu Klosterbier",
+          "库存": 125
+        },
+        {
+          "商品": "Boston Crab Meat",
+          "库存": 123
+        },
+        {
+          "商品": "Grandma's Boysenberry Spread",
+          "库存": 120
+        },
+        {
+          "商品": "Pâté chinois",
+          "库存": 115
+        },
+        {
+          "商品": "Sirop d'érable",
+          "库存": 113
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_12",
+      "question": "单价最低的3个商品，返回商品、单价两列，单价升序，同价按商品名升序。",
+      "category": "ranking",
+      "split": "heldout",
+      "run_id": "22017bc4-071c-42b1-a92a-411ad3cbfb85",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 9068.69,
+      "worker_latency_ms": 8957.09,
+      "total_tokens": 5215,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT product_name AS 商品, unit_price AS 单价 FROM products ORDER BY unit_price ASC, product_name ASC LIMIT 3",
+      "expected_rows": [
+        {
+          "商品": "Geitost",
+          "单价": 2.5
+        },
+        {
+          "商品": "Guaraná Fantástica",
+          "单价": 4.5
+        },
+        {
+          "商品": "Konbu",
+          "单价": 6.0
+        }
+      ],
+      "actual_rows": [
+        {
+          "商品": "Geitost",
+          "单价": 2.5
+        },
+        {
+          "商品": "Guaraná Fantástica",
+          "单价": 4.5
+        },
+        {
+          "商品": "Konbu",
+          "单价": 6.0
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_13",
+      "question": "1997年全年有多少笔订单？按下单日期筛选，只返回订单量一列。",
+      "category": "date",
+      "split": "development",
+      "run_id": "2bbb7dd6-e738-4c92-8336-5b546d4cc50c",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 7235.28,
+      "worker_latency_ms": 7152.64,
+      "total_tokens": 5007,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT COUNT(DISTINCT order_id) AS 订单量 FROM v_order_summary WHERE order_date >= CAST('1997-01-01' AS DATE) AND order_date < CAST('1998-01-01' AS DATE) LIMIT 200",
+      "expected_rows": [
+        {
+          "订单量": 408
+        }
+      ],
+      "actual_rows": [
+        {
+          "订单量": 408
+        }
+      ],
+      "comparison": {
+        "ordered": false,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_14",
+      "question": "1997年逐月折后销售额是多少？使用v_order_summary，返回月份（YYYY-MM）、销售额两列，金额保留两位小数，月份升序。",
+      "category": "date",
+      "split": "development",
+      "run_id": "afb25aee-d8e2-4255-bbeb-43ef193a5467",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 21005.6,
+      "worker_latency_ms": 20826.76,
+      "total_tokens": 6364,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT TO_CHAR(order_date, 'YYYY-MM') AS 月份, ROUND(SUM(sales_amount), 2) AS 销售额 FROM v_order_summary WHERE order_date >= CAST('1997-01-01' AS DATE) AND order_date < CAST('1998-01-01' AS DATE) GROUP BY 1 ORDER BY 1 LIMIT 200",
+      "expected_rows": [
+        {
+          "月份": "1997-01",
+          "销售额": 61258.08
+        },
+        {
+          "月份": "1997-02",
+          "销售额": 38483.64
+        },
+        {
+          "月份": "1997-03",
+          "销售额": 38547.23
+        },
+        {
+          "月份": "1997-04",
+          "销售额": 53032.95
+        },
+        {
+          "月份": "1997-05",
+          "销售额": 53781.3
+        },
+        {
+          "月份": "1997-06",
+          "销售额": 36362.82
+        },
+        {
+          "月份": "1997-07",
+          "销售额": 51020.86
+        },
+        {
+          "月份": "1997-08",
+          "销售额": 47287.68
+        },
+        {
+          "月份": "1997-09",
+          "销售额": 55629.27
+        },
+        {
+          "月份": "1997-10",
+          "销售额": 66749.23
+        },
+        {
+          "月份": "1997-11",
+          "销售额": 43533.8
+        },
+        {
+          "月份": "1997-12",
+          "销售额": 71398.44
+        }
+      ],
+      "actual_rows": [
+        {
+          "月份": "1997-01",
+          "销售额": 61258.08
+        },
+        {
+          "月份": "1997-02",
+          "销售额": 38483.64
+        },
+        {
+          "月份": "1997-03",
+          "销售额": 38547.23
+        },
+        {
+          "月份": "1997-04",
+          "销售额": 53032.95
+        },
+        {
+          "月份": "1997-05",
+          "销售额": 53781.3
+        },
+        {
+          "月份": "1997-06",
+          "销售额": 36362.82
+        },
+        {
+          "月份": "1997-07",
+          "销售额": 51020.86
+        },
+        {
+          "月份": "1997-08",
+          "销售额": 47287.68
+        },
+        {
+          "月份": "1997-09",
+          "销售额": 55629.27
+        },
+        {
+          "月份": "1997-10",
+          "销售额": 66749.23
+        },
+        {
+          "月份": "1997-11",
+          "销售额": 43533.8
+        },
+        {
+          "月份": "1997-12",
+          "销售额": 71398.44
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_15",
+      "question": "1997年第一季度有多少订单？以order_date为准，只返回订单量一列。",
+      "category": "date",
+      "split": "development",
+      "run_id": "a45870db-0711-492f-aa80-b4892c7042af",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 9274.86,
+      "worker_latency_ms": 9135.11,
+      "total_tokens": 5192,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT COUNT(DISTINCT order_id) AS 订单量 FROM v_order_summary WHERE order_date >= CAST('1997-01-01' AS DATE) AND order_date < CAST('1997-04-01' AS DATE) LIMIT 200",
+      "expected_rows": [
+        {
+          "订单量": 92
+        }
+      ],
+      "actual_rows": [
+        {
+          "订单量": 92
+        }
+      ],
+      "comparison": {
+        "ordered": false,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_16",
+      "question": "1998年4月每个收货国家的订单量，返回国家、订单量两列，按国家升序。",
+      "category": "date",
+      "split": "heldout",
+      "run_id": "547fb89d-44db-4243-8ed7-a0704f1c491e",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 13373.99,
+      "worker_latency_ms": 13278.28,
+      "total_tokens": 5784,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT ship_country AS 国家, COUNT(DISTINCT order_id) AS 订单量 FROM v_order_summary WHERE order_date >= CAST('1998-04-01' AS DATE) AND order_date < CAST('1998-05-01' AS DATE) GROUP BY ship_country ORDER BY ship_country ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "国家": "Argentina",
+          "订单量": 2
+        },
+        {
+          "国家": "Austria",
+          "订单量": 4
+        },
+        {
+          "国家": "Belgium",
+          "订单量": 3
+        },
+        {
+          "国家": "Brazil",
+          "订单量": 5
+        },
+        {
+          "国家": "Canada",
+          "订单量": 3
+        },
+        {
+          "国家": "Denmark",
+          "订单量": 1
+        },
+        {
+          "国家": "Finland",
+          "订单量": 2
+        },
+        {
+          "国家": "France",
+          "订单量": 2
+        },
+        {
+          "国家": "Germany",
+          "订单量": 11
+        },
+        {
+          "国家": "Ireland",
+          "订单量": 1
+        },
+        {
+          "国家": "Italy",
+          "订单量": 4
+        },
+        {
+          "国家": "Mexico",
+          "订单量": 1
+        },
+        {
+          "国家": "Norway",
+          "订单量": 1
+        },
+        {
+          "国家": "Poland",
+          "订单量": 2
+        },
+        {
+          "国家": "Portugal",
+          "订单量": 1
+        },
+        {
+          "国家": "Spain",
+          "订单量": 3
+        },
+        {
+          "国家": "Sweden",
+          "订单量": 3
+        },
+        {
+          "国家": "Switzerland",
+          "订单量": 3
+        },
+        {
+          "国家": "UK",
+          "订单量": 6
+        },
+        {
+          "国家": "USA",
+          "订单量": 12
+        },
+        {
+          "国家": "Venezuela",
+          "订单量": 4
+        }
+      ],
+      "actual_rows": [
+        {
+          "国家": "Argentina",
+          "订单量": 2
+        },
+        {
+          "国家": "Austria",
+          "订单量": 4
+        },
+        {
+          "国家": "Belgium",
+          "订单量": 3
+        },
+        {
+          "国家": "Brazil",
+          "订单量": 5
+        },
+        {
+          "国家": "Canada",
+          "订单量": 3
+        },
+        {
+          "国家": "Denmark",
+          "订单量": 1
+        },
+        {
+          "国家": "Finland",
+          "订单量": 2
+        },
+        {
+          "国家": "France",
+          "订单量": 2
+        },
+        {
+          "国家": "Germany",
+          "订单量": 11
+        },
+        {
+          "国家": "Ireland",
+          "订单量": 1
+        },
+        {
+          "国家": "Italy",
+          "订单量": 4
+        },
+        {
+          "国家": "Mexico",
+          "订单量": 1
+        },
+        {
+          "国家": "Norway",
+          "订单量": 1
+        },
+        {
+          "国家": "Poland",
+          "订单量": 2
+        },
+        {
+          "国家": "Portugal",
+          "订单量": 1
+        },
+        {
+          "国家": "Spain",
+          "订单量": 3
+        },
+        {
+          "国家": "Sweden",
+          "订单量": 3
+        },
+        {
+          "国家": "Switzerland",
+          "订单量": 3
+        },
+        {
+          "国家": "UK",
+          "订单量": 6
+        },
+        {
+          "国家": "USA",
+          "订单量": 12
+        },
+        {
+          "国家": "Venezuela",
+          "订单量": 4
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_17",
+      "question": "各品类有多少商品？关联products与categories，返回品类、商品数两列，按品类名称升序。",
+      "category": "join",
+      "split": "development",
+      "run_id": "be9ea743-faaa-4299-b02d-1f69674fa2d8",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 9023.21,
+      "worker_latency_ms": 9003.94,
+      "total_tokens": 5388,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT c.category_name AS 品类, COUNT(p.product_id) AS 商品数 FROM categories AS c JOIN products AS p ON p.category_id = c.category_id GROUP BY c.category_name ORDER BY c.category_name ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "品类": "Beverages",
+          "商品数": 12
+        },
+        {
+          "品类": "Condiments",
+          "商品数": 12
+        },
+        {
+          "品类": "Confections",
+          "商品数": 13
+        },
+        {
+          "品类": "Dairy Products",
+          "商品数": 10
+        },
+        {
+          "品类": "Grains/Cereals",
+          "商品数": 7
+        },
+        {
+          "品类": "Meat/Poultry",
+          "商品数": 6
+        },
+        {
+          "品类": "Produce",
+          "商品数": 5
+        },
+        {
+          "品类": "Seafood",
+          "商品数": 12
+        }
+      ],
+      "actual_rows": [
+        {
+          "品类": "Beverages",
+          "商品数": 12
+        },
+        {
+          "品类": "Condiments",
+          "商品数": 12
+        },
+        {
+          "品类": "Confections",
+          "商品数": 13
+        },
+        {
+          "品类": "Dairy Products",
+          "商品数": 10
+        },
+        {
+          "品类": "Grains/Cereals",
+          "商品数": 7
+        },
+        {
+          "品类": "Meat/Poultry",
+          "商品数": 6
+        },
+        {
+          "品类": "Produce",
+          "商品数": 5
+        },
+        {
+          "品类": "Seafood",
+          "商品数": 12
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_18",
+      "question": "订单10248里分别购买了哪些商品和数量？关联订单明细和商品表，返回商品、数量两列，按商品名升序。",
+      "category": "join",
+      "split": "development",
+      "run_id": "9bc60a6e-a3a7-4875-9b88-e1f3499f3039",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 5352.92,
+      "worker_latency_ms": 5270.2,
+      "total_tokens": 5172,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT p.product_name AS 商品, od.quantity AS 数量 FROM order_details AS od JOIN products AS p ON p.product_id = od.product_id WHERE od.order_id = 10248 ORDER BY p.product_name ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "商品": "Mozzarella di Giovanni",
+          "数量": 5
+        },
+        {
+          "商品": "Queso Cabrales",
+          "数量": 12
+        },
+        {
+          "商品": "Singaporean Hokkien Fried Mee",
+          "数量": 10
+        }
+      ],
+      "actual_rows": [
+        {
+          "商品": "Mozzarella di Giovanni",
+          "数量": 5
+        },
+        {
+          "商品": "Queso Cabrales",
+          "数量": 12
+        },
+        {
+          "商品": "Singaporean Hokkien Fried Mee",
+          "数量": 10
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_19",
+      "question": "查询订单10248的客户名称与收货国家，返回客户、国家两列。",
+      "category": "join",
+      "split": "development",
+      "run_id": "2bb2e600-bbab-42d9-99f6-86660658e2c7",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 7823.66,
+      "worker_latency_ms": 7648.97,
+      "total_tokens": 5156,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT customer_name AS 客户, ship_country AS 国家 FROM v_order_summary WHERE order_id = 10248 LIMIT 200",
+      "expected_rows": [
+        {
+          "客户": "Vins et alcools Chevalier",
+          "国家": "France"
+        }
+      ],
+      "actual_rows": [
+        {
+          "客户": "Vins et alcools Chevalier",
+          "国家": "France"
+        }
+      ],
+      "comparison": {
+        "ordered": false,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_20",
+      "question": "各物流商的订单量和平均运费，返回物流商、订单量、平均运费三列，运费保留两位小数，按物流商名称升序。",
+      "category": "join",
+      "split": "heldout",
+      "run_id": "12be9e8a-79aa-43ec-8913-0c57bd40584a",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 10089.33,
+      "worker_latency_ms": 9876.74,
+      "total_tokens": 5422,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT s.company_name AS 物流商, COUNT(DISTINCT o.order_id) AS 订单量, ROUND(CAST(AVG(o.freight) AS DECIMAL), 2) AS 平均运费 FROM orders AS o JOIN shippers AS s ON s.shipper_id = o.ship_via GROUP BY s.company_name ORDER BY s.company_name ASC LIMIT 200",
+      "expected_rows": [
+        {
+          "物流商": "Federal Shipping",
+          "订单量": 255,
+          "平均运费": 80.44
+        },
+        {
+          "物流商": "Speedy Express",
+          "订单量": 249,
+          "平均运费": 65.0
+        },
+        {
+          "物流商": "United Package",
+          "订单量": 326,
+          "平均运费": 86.64
+        }
+      ],
+      "actual_rows": [
+        {
+          "物流商": "Federal Shipping",
+          "订单量": 255,
+          "平均运费": 80.44
+        },
+        {
+          "物流商": "Speedy Express",
+          "订单量": 249,
+          "平均运费": 65.0
+        },
+        {
+          "物流商": "United Package",
+          "订单量": 326,
+          "平均运费": 86.64
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_21",
+      "question": "列出2000年及以后下单的订单，返回订单ID一列，按订单ID升序；没有记录就返回空结果。",
+      "category": "empty",
+      "split": "development",
+      "run_id": "0572042b-1b0d-48a9-a1e0-e9d0552537d0",
+      "status": "completed",
+      "correct": false,
+      "reason": "row_count_mismatch",
+      "first_sql_success": true,
+      "latency_ms": 11335.97,
+      "worker_latency_ms": 11193.63,
+      "total_tokens": 8081,
+      "tool_call_count": 2,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT MIN(order_date) AS 最早下单日, MAX(order_date) AS 最晚下单日, COUNT(*) AS 订单总数 FROM orders LIMIT 200",
+      "expected_rows": [],
+      "actual_rows": [
+        {
+          "最早下单日": "1996-07-04",
+          "最晚下单日": "1998-05-06",
+          "订单总数": 830
+        }
+      ],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_22",
+      "question": "查找商品ID为999999的商品，只返回商品名称一列；没有记录就返回空结果。",
+      "category": "empty",
+      "split": "development",
+      "run_id": "bd1f3055-8368-4a92-86e9-9cf0f827a2be",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 4951.1,
+      "worker_latency_ms": 4915.57,
+      "total_tokens": 5152,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT product_name AS 商品名称 FROM products WHERE product_id = 999999 LIMIT 200",
+      "expected_rows": [],
+      "actual_rows": [],
+      "comparison": {
+        "ordered": false,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_23",
+      "question": "列出收货国家为Atlantis的订单，只返回订单ID一列，按订单ID升序；没有记录就返回空结果。",
+      "category": "empty",
+      "split": "development",
+      "run_id": "96864589-0f67-4526-8702-0a136c069522",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 5751.13,
+      "worker_latency_ms": 5599.19,
+      "total_tokens": 4996,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT order_id FROM v_order_summary WHERE ship_country = 'Atlantis' ORDER BY order_id ASC LIMIT 200",
+      "expected_rows": [],
+      "actual_rows": [],
+      "comparison": {
+        "ordered": true,
+        "abs_tolerance": "0.005"
+      }
+    },
+    {
+      "id": "portfolio_24",
+      "question": "查找客户ID为ZZZZZ的客户，只返回客户名称一列；不存在就返回空结果。",
+      "category": "empty",
+      "split": "heldout",
+      "run_id": "3849520c-a79b-4a03-8831-e8165959a578",
+      "status": "completed",
+      "correct": true,
+      "reason": "matched",
+      "first_sql_success": true,
+      "latency_ms": 5537.14,
+      "worker_latency_ms": 5343.47,
+      "total_tokens": 4936,
+      "tool_call_count": 1,
+      "stop_reason": "",
+      "sql_failure_count": 0,
+      "actual_sql": "SELECT company_name AS 客户名称 FROM customers WHERE customer_id = 'ZZZZZ' LIMIT 200",
+      "expected_rows": [],
+      "actual_rows": [],
+      "comparison": {
+        "ordered": false,
+        "abs_tolerance": "0.005"
+      }
+    }
+  ],
+  "metrics": {
+    "case_count": 24,
+    "result_accuracy": 95.83,
+    "first_sql_success_rate": 100.0,
+    "sql_attempted_case_count": 24,
+    "recovery_eligible_count": 0,
+    "recovery_result_accuracy": null,
+    "timeout_count": 0,
+    "avg_latency_ms": 8449.97,
+    "p95_latency_ms": 13197.32,
+    "total_tokens": 129452,
+    "avg_tokens": 5393.83,
+    "avg_tool_calls": 1.04,
+    "rag_recall_at_5": 0.9167,
+    "rag_mrr": 0.8125
+  },
+  "metrics_by_split": {
+    "development": {
+      "case_count": 18,
+      "result_accuracy": 94.44,
+      "first_sql_success_rate": 100.0,
+      "sql_attempted_case_count": 18,
+      "recovery_eligible_count": 0,
+      "recovery_result_accuracy": null,
+      "timeout_count": 0,
+      "avg_latency_ms": 8224.5,
+      "p95_latency_ms": 13517.58,
+      "total_tokens": 97688,
+      "avg_tokens": 5427.11,
+      "avg_tool_calls": 1.06
+    },
+    "heldout": {
+      "case_count": 6,
+      "result_accuracy": 100.0,
+      "first_sql_success_rate": 100.0,
+      "sql_attempted_case_count": 6,
+      "recovery_eligible_count": 0,
+      "recovery_result_accuracy": null,
+      "timeout_count": 0,
+      "avg_latency_ms": 9126.41,
+      "p95_latency_ms": 12552.83,
+      "total_tokens": 31764,
+      "avg_tokens": 5294.0,
+      "avg_tool_calls": 1.0
+    }
+  }
+}

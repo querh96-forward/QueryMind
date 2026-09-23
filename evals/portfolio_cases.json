@@ -1,0 +1,266 @@
+[
+  {
+    "id": "portfolio_01",
+    "category": "filter",
+    "split": "development",
+    "question": "列出来自Germany的客户，返回客户ID、客户名称两列，按客户ID升序。",
+    "reference_sql": "SELECT customer_id AS 客户ID, company_name AS 客户名称 FROM customers WHERE country='Germany' ORDER BY customer_id",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_02",
+    "category": "filter",
+    "split": "development",
+    "question": "列出已停产商品，返回商品ID、商品名称两列，按商品ID升序。",
+    "reference_sql": "SELECT product_id AS 商品ID, product_name AS 商品名称 FROM products WHERE discontinued=true ORDER BY product_id",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_03",
+    "category": "filter",
+    "split": "development",
+    "question": "列出库存为0的商品，返回商品ID、商品名称、库存三列，按商品ID升序。",
+    "reference_sql": "SELECT product_id AS 商品ID, product_name AS 商品名称, units_in_stock AS 库存 FROM products WHERE units_in_stock=0 ORDER BY product_id",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_04",
+    "category": "filter",
+    "split": "heldout",
+    "question": "列出来自UK的客户，返回客户ID、客户名称两列，按客户ID升序。",
+    "reference_sql": "SELECT customer_id AS 客户ID, company_name AS 客户名称 FROM customers WHERE country='UK' ORDER BY customer_id",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_05",
+    "category": "aggregation",
+    "split": "development",
+    "question": "数据库中一共有多少订单？只返回订单量一列。",
+    "reference_sql": "SELECT COUNT(*) AS 订单量 FROM orders",
+    "comparison": {
+      "ordered": false,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_06",
+    "category": "aggregation",
+    "split": "development",
+    "question": "各国家分别有多少客户？返回国家、客户数两列，不要求排序。",
+    "reference_sql": "SELECT country AS 国家, COUNT(*) AS 客户数 FROM customers GROUP BY country",
+    "comparison": {
+      "ordered": false,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_07",
+    "category": "aggregation",
+    "split": "development",
+    "question": "在v_order_summary中计算全部历史订单的折后销售额合计，保留两位小数，只返回销售额一列。",
+    "reference_sql": "SELECT ROUND(SUM(sales_amount),2) AS 销售额 FROM v_order_summary",
+    "comparison": {
+      "ordered": false,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_08",
+    "category": "aggregation",
+    "split": "heldout",
+    "question": "每位物流商各有多少订单？按物流商ID升序，返回物流商ID、订单量两列。",
+    "reference_sql": "SELECT ship_via AS 物流商ID, COUNT(*) AS 订单量 FROM orders GROUP BY ship_via ORDER BY ship_via",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_09",
+    "category": "ranking",
+    "split": "development",
+    "question": "折后销售额最高的5个商品是什么？使用v_product_sales，返回商品、销售额两列，按销售额降序，同额时按商品名升序。",
+    "reference_sql": "SELECT product_name AS 商品, sales_amount AS 销售额 FROM v_product_sales ORDER BY sales_amount DESC, product_name LIMIT 5",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_10",
+    "category": "ranking",
+    "split": "development",
+    "question": "运费最高的5笔订单，返回订单ID、运费两列，运费降序，同额按订单ID升序。",
+    "reference_sql": "SELECT order_id AS 订单ID, freight AS 运费 FROM orders ORDER BY freight DESC, order_id LIMIT 5",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_11",
+    "category": "ranking",
+    "split": "development",
+    "question": "库存最多的5个商品，返回商品、库存两列，库存降序，同库存按商品名称升序。",
+    "reference_sql": "SELECT product_name AS 商品, units_in_stock AS 库存 FROM products ORDER BY units_in_stock DESC, product_name LIMIT 5",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_12",
+    "category": "ranking",
+    "split": "heldout",
+    "question": "单价最低的3个商品，返回商品、单价两列，单价升序，同价按商品名升序。",
+    "reference_sql": "SELECT product_name AS 商品, unit_price AS 单价 FROM products ORDER BY unit_price, product_name LIMIT 3",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_13",
+    "category": "date",
+    "split": "development",
+    "question": "1997年全年有多少笔订单？按下单日期筛选，只返回订单量一列。",
+    "reference_sql": "SELECT COUNT(*) AS 订单量 FROM orders WHERE order_date >= DATE '1997-01-01' AND order_date < DATE '1998-01-01'",
+    "comparison": {
+      "ordered": false,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_14",
+    "category": "date",
+    "split": "development",
+    "question": "1997年逐月折后销售额是多少？使用v_order_summary，返回月份（YYYY-MM）、销售额两列，金额保留两位小数，月份升序。",
+    "reference_sql": "SELECT to_char(order_date,'YYYY-MM') AS 月份, ROUND(SUM(sales_amount),2) AS 销售额 FROM v_order_summary WHERE order_date >= DATE '1997-01-01' AND order_date < DATE '1998-01-01' GROUP BY 月份 ORDER BY 月份",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_15",
+    "category": "date",
+    "split": "development",
+    "question": "1997年第一季度有多少订单？以order_date为准，只返回订单量一列。",
+    "reference_sql": "SELECT COUNT(*) AS 订单量 FROM orders WHERE order_date >= DATE '1997-01-01' AND order_date < DATE '1997-04-01'",
+    "comparison": {
+      "ordered": false,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_16",
+    "category": "date",
+    "split": "heldout",
+    "question": "1998年4月每个收货国家的订单量，返回国家、订单量两列，按国家升序。",
+    "reference_sql": "SELECT ship_country AS 国家, COUNT(*) AS 订单量 FROM orders WHERE order_date >= DATE '1998-04-01' AND order_date < DATE '1998-05-01' GROUP BY ship_country ORDER BY ship_country",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_17",
+    "category": "join",
+    "split": "development",
+    "question": "各品类有多少商品？关联products与categories，返回品类、商品数两列，按品类名称升序。",
+    "reference_sql": "SELECT c.category_name AS 品类, COUNT(*) AS 商品数 FROM products p JOIN categories c ON p.category_id=c.category_id GROUP BY c.category_name ORDER BY c.category_name",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_18",
+    "category": "join",
+    "split": "development",
+    "question": "订单10248里分别购买了哪些商品和数量？关联订单明细和商品表，返回商品、数量两列，按商品名升序。",
+    "reference_sql": "SELECT p.product_name AS 商品, d.quantity AS 数量 FROM order_details d JOIN products p ON p.product_id=d.product_id WHERE d.order_id=10248 ORDER BY p.product_name",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_19",
+    "category": "join",
+    "split": "development",
+    "question": "查询订单10248的客户名称与收货国家，返回客户、国家两列。",
+    "reference_sql": "SELECT c.company_name AS 客户, o.ship_country AS 国家 FROM orders o JOIN customers c ON o.customer_id=c.customer_id WHERE o.order_id=10248",
+    "comparison": {
+      "ordered": false,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_20",
+    "category": "join",
+    "split": "heldout",
+    "question": "各物流商的订单量和平均运费，返回物流商、订单量、平均运费三列，运费保留两位小数，按物流商名称升序。",
+    "reference_sql": "SELECT s.company_name AS 物流商, COUNT(*) AS 订单量, ROUND(AVG(o.freight),2) AS 平均运费 FROM orders o JOIN shippers s ON o.ship_via=s.shipper_id GROUP BY s.company_name ORDER BY s.company_name",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_21",
+    "category": "empty",
+    "split": "development",
+    "question": "列出2000年及以后下单的订单，返回订单ID一列，按订单ID升序；没有记录就返回空结果。",
+    "reference_sql": "SELECT order_id AS 订单ID FROM orders WHERE order_date >= DATE '2000-01-01' ORDER BY order_id",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_22",
+    "category": "empty",
+    "split": "development",
+    "question": "查找商品ID为999999的商品，只返回商品名称一列；没有记录就返回空结果。",
+    "reference_sql": "SELECT product_name AS 商品名称 FROM products WHERE product_id=999999",
+    "comparison": {
+      "ordered": false,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_23",
+    "category": "empty",
+    "split": "development",
+    "question": "列出收货国家为Atlantis的订单，只返回订单ID一列，按订单ID升序；没有记录就返回空结果。",
+    "reference_sql": "SELECT order_id AS 订单ID FROM orders WHERE ship_country='Atlantis' ORDER BY order_id",
+    "comparison": {
+      "ordered": true,
+      "abs_tolerance": "0.005"
+    }
+  },
+  {
+    "id": "portfolio_24",
+    "category": "empty",
+    "split": "heldout",
+    "question": "查找客户ID为ZZZZZ的客户，只返回客户名称一列；不存在就返回空结果。",
+    "reference_sql": "SELECT company_name AS 客户名称 FROM customers WHERE customer_id='ZZZZZ'",
+    "comparison": {
+      "ordered": false,
+      "abs_tolerance": "0.005"
+    }
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "scope": "Post-hoc failure diagnosis only. Main SQL score remains 20/24; no scoring rule or labels changed.",
+  "failures": [
+    {
+      "id": "portfolio_01",
+      "strict_correct": false,
+      "strict_reason": "ordered_value_or_column_mismatch",
+      "actual_sql": "SELECT customer_id AS \"客户ID\", company_name AS \"客户名称\" FROM customers WHERE country = 'Germany' ORDER BY customer_id ASC LIMIT 200",
+      "expected_row_count": 11,
+      "actual_row_count": 11,
+      "posthoc_aliases": {
+        "客户ID": "客户id"
+      },
+      "values_match_after_posthoc_aliases": true
+    },
+    {
+      "id": "portfolio_08",
+      "strict_correct": false,
+      "strict_reason": "ordered_value_or_column_mismatch",
+      "actual_sql": "SELECT ship_via AS shipper_id, COUNT(DISTINCT order_id) AS order_count FROM orders GROUP BY ship_via ORDER BY ship_via ASC LIMIT 200",
+      "expected_row_count": 3,
+      "actual_row_count": 3,
+      "posthoc_aliases": {
+        "shipper_id": "物流商id",
+        "order_count": "订单量"
+      },
+      "values_match_after_posthoc_aliases": true
+    },
+    {
+      "id": "portfolio_13",
+      "strict_correct": false,
+      "strict_reason": "unordered_value_or_column_mismatch",
+      "actual_sql": "SELECT COUNT(DISTINCT order_id) AS order_count FROM orders WHERE order_date >= CAST('1997-01-01' AS DATE) AND order_date < CAST('1998-01-01' AS DATE) LIMIT 200",
+      "expected_row_count": 1,
+      "actual_row_count": 1,
+      "posthoc_aliases": {
+        "order_count": "订单量"
+      },
+      "values_match_after_posthoc_aliases": true
+    },
+    {
+      "id": "portfolio_21",
+      "strict_correct": false,
+      "strict_reason": "row_count_mismatch",
+      "actual_sql": "SELECT MIN(order_date) AS min_date, MAX(order_date) AS max_date, COUNT(*) AS total_orders FROM orders LIMIT 200",
+      "expected_row_count": 0,
+      "actual_row_count": 1
+    }
+  ]
+}

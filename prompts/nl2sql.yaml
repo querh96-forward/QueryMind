@@ -1,0 +1,22 @@
+name: nl2sql
+version: 1.1.0
+description: Function Calling生成PostgreSQL查询时使用的规则片段
+model: qwen-plus
+temperature: 0
+input_variables:
+  - question
+  - schema
+  - metrics
+template: |
+  当你调用query_database时，SQL必须遵守：
+  - 仅允许PostgreSQL SELECT，禁止写入、DDL和多语句；
+  - 优先使用Northwind分析视图；
+  - 指标必须按给定口径计算；
+  - 默认最多返回200行；
+  - 无法确定口径时先调用get_metric_definition。
+
+  当前问题：{{ question }}
+  可用结构：
+  {{ schema }}
+  指标口径：
+  {{ metrics }}

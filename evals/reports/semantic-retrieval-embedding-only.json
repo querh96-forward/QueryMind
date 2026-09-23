@@ -1,0 +1,2328 @@
+{
+  "created_at": "2026-09-19T07:44:05.679286+00:00",
+  "complete": true,
+  "source_sha256": "1e1b7beb7899d4e232e517db842b9cb29979d43719f8e193ab67a6a8be834440",
+  "datasets": {
+    "legacy": {
+      "path": "rag_cases.json",
+      "sha256": "8a399dd62c65398c5f9f20faa651614c6eb603109579b405fba592549e0d088e"
+    },
+    "paraphrase": {
+      "path": "semantic_cases.json",
+      "sha256": "148f57ea8fd943f34dd531104c9a95a28219c9860b5b44141a6db0164e7ccf74"
+    }
+  },
+  "cache_enabled": false,
+  "scope": "One labelled target per query; Recall@5 and MRR@5, no answer generation.",
+  "label_policy": "20 manually authored paraphrases fixed before the first run; no tuning on results.",
+  "indexes": {
+    "hash256": {
+      "provider": "hash",
+      "model": "blake2b-token-v1",
+      "dimensions": 256,
+      "endpoint_sha256": null,
+      "index_version": "2a3d014067c600646920fc77",
+      "corpus_sha256": "3f215f55c211965837dc4f7b947c4bcb363ce0b8a2746304a9ca4ce857a9721f",
+      "document_count": 48,
+      "table": "rag_knowledge_2a3d014067c600646920fc77",
+      "created": true,
+      "embedding_tokens": 0
+    },
+    "semantic": {
+      "provider": "openai",
+      "model": "text-embedding-v4",
+      "dimensions": 1024,
+      "endpoint_sha256": "5891aed827c4e67b2d7c0c73ea819327ce3f2b6ef72213cd79669486a26b1ead",
+      "index_version": "ba171e095593cbbe914b10b9",
+      "corpus_sha256": "3f215f55c211965837dc4f7b947c4bcb363ce0b8a2746304a9ca4ce857a9721f",
+      "document_count": 48,
+      "table": "rag_knowledge_ba171e095593cbbe914b10b9",
+      "created": false,
+      "embedding_tokens": 0
+    }
+  },
+  "cases": [
+    {
+      "query": "销售额如何计算",
+      "expected_id": "metric_sales",
+      "id": "legacy_01",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "rule_profit",
+        "fewshot_category",
+        "fewshot_country",
+        "fewshot_top_products",
+        "metric_aov"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.84
+    },
+    {
+      "query": "销售额如何计算",
+      "expected_id": "metric_sales",
+      "id": "legacy_01",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_profit",
+        "fewshot_category",
+        "fewshot_country",
+        "view_v_customer_sales",
+        "fewshot_top_products"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.92
+    },
+    {
+      "query": "销售额如何计算",
+      "expected_id": "metric_sales",
+      "id": "legacy_01",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "metric_aov",
+        "metric_sales",
+        "metric_quantity",
+        "rule_profit",
+        "fewshot_category"
+      ],
+      "rank": 2,
+      "embedding_tokens": 4,
+      "latency_ms": 407.27
+    },
+    {
+      "query": "销售额如何计算",
+      "expected_id": "metric_sales",
+      "id": "legacy_01",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_sales",
+        "rule_profit",
+        "metric_aov",
+        "metric_gross",
+        "metric_quantity"
+      ],
+      "rank": 1,
+      "embedding_tokens": 4,
+      "latency_ms": 167.13
+    },
+    {
+      "query": "客单价的指标口径",
+      "expected_id": "metric_aov",
+      "id": "legacy_02",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "metric_aov",
+        "fewshot_aov_country",
+        "rule_country",
+        "fewshot_inventory",
+        "fewshot_repeat"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 3.16
+    },
+    {
+      "query": "客单价的指标口径",
+      "expected_id": "metric_aov",
+      "id": "legacy_02",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_cancel",
+        "metric_aov",
+        "fewshot_aov_country",
+        "fewshot_supplier",
+        "fewshot_inventory"
+      ],
+      "rank": 2,
+      "embedding_tokens": 0,
+      "latency_ms": 2.14
+    },
+    {
+      "query": "客单价的指标口径",
+      "expected_id": "metric_aov",
+      "id": "legacy_02",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "metric_aov",
+        "fewshot_aov_country",
+        "view_v_order_line_sales",
+        "fewshot_category",
+        "view_v_customer_sales"
+      ],
+      "rank": 1,
+      "embedding_tokens": 7,
+      "latency_ms": 141.63
+    },
+    {
+      "query": "客单价的指标口径",
+      "expected_id": "metric_aov",
+      "id": "legacy_02",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_aov",
+        "fewshot_aov_country",
+        "metric_gross",
+        "metric_sales",
+        "metric_orders"
+      ],
+      "rank": 1,
+      "embedding_tokens": 7,
+      "latency_ms": 161.64
+    },
+    {
+      "query": "如何判断补货风险",
+      "expected_id": "metric_inventory",
+      "id": "legacy_03",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "metric_inventory",
+        "fewshot_inventory",
+        "fewshot_discount_product",
+        "fewshot_employee",
+        "fewshot_aov_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 2.82
+    },
+    {
+      "query": "如何判断补货风险",
+      "expected_id": "metric_inventory",
+      "id": "legacy_03",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "metric_inventory",
+        "fewshot_inventory",
+        "rule_discount",
+        "rule_currency",
+        "fewshot_discount_product"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 1.34
+    },
+    {
+      "query": "如何判断补货风险",
+      "expected_id": "metric_inventory",
+      "id": "legacy_03",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "metric_inventory",
+        "fewshot_inventory",
+        "fewshot_shipping",
+        "fewshot_stock_value",
+        "metric_freight"
+      ],
+      "rank": 1,
+      "embedding_tokens": 6,
+      "latency_ms": 169.83
+    },
+    {
+      "query": "如何判断补货风险",
+      "expected_id": "metric_inventory",
+      "id": "legacy_03",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_inventory",
+        "fewshot_inventory",
+        "view_v_inventory_status",
+        "rule_inventory",
+        "metric_on_time"
+      ],
+      "rank": 1,
+      "embedding_tokens": 6,
+      "latency_ms": 142.42
+    },
+    {
+      "query": "运费为什么不能在明细表直接相加",
+      "expected_id": "rule_freight",
+      "id": "legacy_04",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "rule_freight",
+        "schema_order_details",
+        "fewshot_category",
+        "fewshot_freight_country",
+        "fewshot_repeat"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 2.58
+    },
+    {
+      "query": "运费为什么不能在明细表直接相加",
+      "expected_id": "rule_freight",
+      "id": "legacy_04",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_freight",
+        "rule_profit",
+        "schema_customers",
+        "view_v_order_line_sales",
+        "metric_orders"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 1.3
+    },
+    {
+      "query": "运费为什么不能在明细表直接相加",
+      "expected_id": "rule_freight",
+      "id": "legacy_04",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "metric_freight",
+        "rule_freight",
+        "fewshot_freight_country",
+        "schema_order_details",
+        "fewshot_discount_product"
+      ],
+      "rank": 2,
+      "embedding_tokens": 10,
+      "latency_ms": 161.62
+    },
+    {
+      "query": "运费为什么不能在明细表直接相加",
+      "expected_id": "rule_freight",
+      "id": "legacy_04",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_freight",
+        "metric_freight",
+        "view_v_order_summary",
+        "metric_sales",
+        "fewshot_freight_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 10,
+      "latency_ms": 154.27
+    },
+    {
+      "query": "客户表有哪些字段",
+      "expected_id": "schema_customers",
+      "id": "legacy_05",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "schema_customers",
+        "rule_profit",
+        "rule_cancel",
+        "fewshot_repeat",
+        "rule_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 2.45
+    },
+    {
+      "query": "客户表有哪些字段",
+      "expected_id": "schema_customers",
+      "id": "legacy_05",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_cancel",
+        "rule_profit",
+        "schema_customers",
+        "fewshot_repeat",
+        "rule_employee"
+      ],
+      "rank": 3,
+      "embedding_tokens": 0,
+      "latency_ms": 1.45
+    },
+    {
+      "query": "客户表有哪些字段",
+      "expected_id": "schema_customers",
+      "id": "legacy_05",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "schema_customers",
+        "rule_customer",
+        "view_v_customer_sales",
+        "fewshot_top_customers",
+        "rule_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 5,
+      "latency_ms": 160.02
+    },
+    {
+      "query": "客户表有哪些字段",
+      "expected_id": "schema_customers",
+      "id": "legacy_05",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "schema_customers",
+        "rule_customer",
+        "schema_employees",
+        "rule_inventory",
+        "fewshot_top_customers"
+      ],
+      "rank": 1,
+      "embedding_tokens": 5,
+      "latency_ms": 161.29
+    },
+    {
+      "query": "订单汇总分析视图",
+      "expected_id": "view_v_order_summary",
+      "id": "legacy_06",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "view_v_order_summary",
+        "view_v_order_line_sales",
+        "view_v_customer_sales",
+        "view_v_inventory_status",
+        "view_v_product_sales"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 2.98
+    },
+    {
+      "query": "订单汇总分析视图",
+      "expected_id": "view_v_order_summary",
+      "id": "legacy_06",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "view_v_customer_sales",
+        "view_v_order_summary",
+        "view_v_order_line_sales",
+        "view_v_product_sales",
+        "metric_sales"
+      ],
+      "rank": 2,
+      "embedding_tokens": 0,
+      "latency_ms": 2.08
+    },
+    {
+      "query": "订单汇总分析视图",
+      "expected_id": "view_v_order_summary",
+      "id": "legacy_06",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "view_v_order_summary",
+        "view_v_order_line_sales",
+        "view_v_product_sales",
+        "view_v_inventory_status",
+        "view_v_customer_sales"
+      ],
+      "rank": 1,
+      "embedding_tokens": 6,
+      "latency_ms": 159.25
+    },
+    {
+      "query": "订单汇总分析视图",
+      "expected_id": "view_v_order_summary",
+      "id": "legacy_06",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "view_v_order_summary",
+        "view_v_product_sales",
+        "view_v_order_line_sales",
+        "view_v_customer_sales",
+        "view_v_inventory_status"
+      ],
+      "rank": 1,
+      "embedding_tokens": 6,
+      "latency_ms": 151.72
+    },
+    {
+      "query": "商品销售额排名SQL示例",
+      "expected_id": "fewshot_top_products",
+      "id": "legacy_07",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "view_v_product_sales",
+        "fewshot_top_products",
+        "rule_profit",
+        "metric_aov",
+        "view_v_order_line_sales"
+      ],
+      "rank": 2,
+      "embedding_tokens": 0,
+      "latency_ms": 2.65
+    },
+    {
+      "query": "商品销售额排名SQL示例",
+      "expected_id": "fewshot_top_products",
+      "id": "legacy_07",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "view_v_product_sales",
+        "fewshot_top_products",
+        "metric_sales",
+        "rule_profit",
+        "metric_freight"
+      ],
+      "rank": 2,
+      "embedding_tokens": 0,
+      "latency_ms": 1.72
+    },
+    {
+      "query": "商品销售额排名SQL示例",
+      "expected_id": "fewshot_top_products",
+      "id": "legacy_07",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_top_products",
+        "view_v_product_sales",
+        "fewshot_discount_product",
+        "metric_sales",
+        "view_v_order_line_sales"
+      ],
+      "rank": 1,
+      "embedding_tokens": 7,
+      "latency_ms": 155.23
+    },
+    {
+      "query": "商品销售额排名SQL示例",
+      "expected_id": "fewshot_top_products",
+      "id": "legacy_07",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "fewshot_top_products",
+        "fewshot_category",
+        "metric_sales",
+        "fewshot_top_customers",
+        "fewshot_discount_product"
+      ],
+      "rank": 1,
+      "embedding_tokens": 7,
+      "latency_ms": 128.99
+    },
+    {
+      "query": "不同国家销售额查询例子",
+      "expected_id": "fewshot_country",
+      "id": "legacy_08",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_country",
+        "metric_aov",
+        "metric_gross",
+        "metric_sales",
+        "rule_profit"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 2.61
+    },
+    {
+      "query": "不同国家销售额查询例子",
+      "expected_id": "fewshot_country",
+      "id": "legacy_08",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_country",
+        "metric_quantity",
+        "metric_gross",
+        "metric_aov",
+        "metric_sales"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 1.44
+    },
+    {
+      "query": "不同国家销售额查询例子",
+      "expected_id": "fewshot_country",
+      "id": "legacy_08",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_country",
+        "metric_sales",
+        "fewshot_aov_country",
+        "rule_profit",
+        "fewshot_freight_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 6,
+      "latency_ms": 157.06
+    },
+    {
+      "query": "不同国家销售额查询例子",
+      "expected_id": "fewshot_country",
+      "id": "legacy_08",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "fewshot_country",
+        "fewshot_aov_country",
+        "fewshot_freight_country",
+        "metric_sales",
+        "metric_quantity"
+      ],
+      "rank": 1,
+      "embedding_tokens": 6,
+      "latency_ms": 143.11
+    },
+    {
+      "query": "利润能不能直接计算",
+      "expected_id": "rule_profit",
+      "id": "legacy_09",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "rule_profit",
+        "metric_freight",
+        "fewshot_aov_country",
+        "fewshot_category",
+        "fewshot_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 3.75
+    },
+    {
+      "query": "利润能不能直接计算",
+      "expected_id": "rule_profit",
+      "id": "legacy_09",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_profit",
+        "rule_inventory",
+        "rule_discount",
+        "metric_freight",
+        "fewshot_category"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 1.61
+    },
+    {
+      "query": "利润能不能直接计算",
+      "expected_id": "rule_profit",
+      "id": "legacy_09",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "rule_profit",
+        "metric_freight",
+        "fewshot_discount_product",
+        "fewshot_category",
+        "metric_aov"
+      ],
+      "rank": 1,
+      "embedding_tokens": 5,
+      "latency_ms": 191.79
+    },
+    {
+      "query": "利润能不能直接计算",
+      "expected_id": "rule_profit",
+      "id": "legacy_09",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_profit",
+        "metric_sales",
+        "metric_aov",
+        "metric_gross",
+        "metric_freight"
+      ],
+      "rank": 1,
+      "embedding_tokens": 5,
+      "latency_ms": 182.08
+    },
+    {
+      "query": "折扣率0.1是什么意思",
+      "expected_id": "rule_discount",
+      "id": "legacy_10",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "rule_discount",
+        "fewshot_discount_product",
+        "metric_discount",
+        "metric_sales",
+        "fewshot_repeat"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 5.5
+    },
+    {
+      "query": "折扣率0.1是什么意思",
+      "expected_id": "rule_discount",
+      "id": "legacy_10",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_discount",
+        "schema_suppliers",
+        "fewshot_discount_product",
+        "rule_inventory",
+        "view_v_order_summary"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 1.77
+    },
+    {
+      "query": "折扣率0.1是什么意思",
+      "expected_id": "rule_discount",
+      "id": "legacy_10",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "rule_discount",
+        "metric_discount",
+        "fewshot_discount_product",
+        "metric_sales",
+        "fewshot_freight_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 8,
+      "latency_ms": 213.16
+    },
+    {
+      "query": "折扣率0.1是什么意思",
+      "expected_id": "rule_discount",
+      "id": "legacy_10",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_discount",
+        "metric_discount",
+        "metric_freight",
+        "fewshot_discount_product",
+        "metric_gross"
+      ],
+      "rank": 1,
+      "embedding_tokens": 8,
+      "latency_ms": 200.26
+    },
+    {
+      "query": "按期发货率定义",
+      "expected_id": "metric_on_time",
+      "id": "legacy_11",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "metric_on_time",
+        "fewshot_shipping",
+        "fewshot_repeat",
+        "fewshot_inventory",
+        "fewshot_monthly"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 2.98
+    },
+    {
+      "query": "按期发货率定义",
+      "expected_id": "metric_on_time",
+      "id": "legacy_11",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "metric_on_time",
+        "fewshot_shipping",
+        "fewshot_repeat",
+        "metric_shipping",
+        "fewshot_supplier"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 1.42
+    },
+    {
+      "query": "按期发货率定义",
+      "expected_id": "metric_on_time",
+      "id": "legacy_11",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "metric_on_time",
+        "fewshot_shipping",
+        "fewshot_freight_country",
+        "fewshot_inventory",
+        "metric_freight"
+      ],
+      "rank": 1,
+      "embedding_tokens": 6,
+      "latency_ms": 160.39
+    },
+    {
+      "query": "按期发货率定义",
+      "expected_id": "metric_on_time",
+      "id": "legacy_11",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_on_time",
+        "fewshot_shipping",
+        "metric_shipping",
+        "metric_inventory",
+        "metric_freight"
+      ],
+      "rank": 1,
+      "embedding_tokens": 6,
+      "latency_ms": 173.82
+    },
+    {
+      "query": "销售员工来自哪张表",
+      "expected_id": "schema_employees",
+      "id": "legacy_12",
+      "group": "legacy",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "rule_employee",
+        "fewshot_employee",
+        "metric_quantity",
+        "schema_employees",
+        "metric_sales"
+      ],
+      "rank": 4,
+      "embedding_tokens": 0,
+      "latency_ms": 4.17
+    },
+    {
+      "query": "销售员工来自哪张表",
+      "expected_id": "schema_employees",
+      "id": "legacy_12",
+      "group": "legacy",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_employee",
+        "metric_sales",
+        "schema_employees",
+        "metric_quantity",
+        "rule_employee"
+      ],
+      "rank": 3,
+      "embedding_tokens": 0,
+      "latency_ms": 1.67
+    },
+    {
+      "query": "销售员工来自哪张表",
+      "expected_id": "schema_employees",
+      "id": "legacy_12",
+      "group": "legacy",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "rule_employee",
+        "schema_employees",
+        "fewshot_employee",
+        "metric_quantity",
+        "metric_sales"
+      ],
+      "rank": 2,
+      "embedding_tokens": 7,
+      "latency_ms": 203.49
+    },
+    {
+      "query": "销售员工来自哪张表",
+      "expected_id": "schema_employees",
+      "id": "legacy_12",
+      "group": "legacy",
+      "variant": "semantic_vector",
+      "ids": [
+        "schema_employees",
+        "rule_employee",
+        "view_v_order_line_sales",
+        "schema_customers",
+        "schema_orders"
+      ],
+      "rank": 1,
+      "embedding_tokens": 7,
+      "latency_ms": 154.4
+    },
+    {
+      "id": "semantic_01",
+      "query": "每成交一笔生意，顾客平均付了多少钱，这个数怎么算？",
+      "expected_id": "metric_aov",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_inventory",
+        "fewshot_aov_country",
+        "fewshot_top_customers",
+        "fewshot_employee",
+        "fewshot_quarter"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.54
+    },
+    {
+      "id": "semantic_01",
+      "query": "每成交一笔生意，顾客平均付了多少钱，这个数怎么算？",
+      "expected_id": "metric_aov",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_currency",
+        "rule_cancel",
+        "rule_discount",
+        "fewshot_inventory",
+        "fewshot_top_customers"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.73
+    },
+    {
+      "id": "semantic_01",
+      "query": "每成交一笔生意，顾客平均付了多少钱，这个数怎么算？",
+      "expected_id": "metric_aov",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_aov_country",
+        "metric_aov",
+        "fewshot_discount_product",
+        "metric_gross",
+        "metric_freight"
+      ],
+      "rank": 2,
+      "embedding_tokens": 17,
+      "latency_ms": 172.03
+    },
+    {
+      "id": "semantic_01",
+      "query": "每成交一笔生意，顾客平均付了多少钱，这个数怎么算？",
+      "expected_id": "metric_aov",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_aov",
+        "rule_profit",
+        "metric_sales",
+        "metric_orders",
+        "metric_gross"
+      ],
+      "rank": 1,
+      "embedding_tokens": 17,
+      "latency_ms": 168.17
+    },
+    {
+      "id": "semantic_02",
+      "query": "不考虑给买家的优惠，按标价卖掉这些货本来该收多少钱？",
+      "expected_id": "metric_gross",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_discount_product",
+        "rule_profit",
+        "fewshot_employee",
+        "fewshot_stock_value",
+        "rule_cancel"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.13
+    },
+    {
+      "id": "semantic_02",
+      "query": "不考虑给买家的优惠，按标价卖掉这些货本来该收多少钱？",
+      "expected_id": "metric_gross",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_discount_product",
+        "fewshot_top_products",
+        "fewshot_stock_value",
+        "fewshot_supplier",
+        "view_v_inventory_status"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.3
+    },
+    {
+      "id": "semantic_02",
+      "query": "不考虑给买家的优惠，按标价卖掉这些货本来该收多少钱？",
+      "expected_id": "metric_gross",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "rule_profit",
+        "fewshot_discount_product",
+        "fewshot_aov_country",
+        "fewshot_category",
+        "fewshot_inventory"
+      ],
+      "rank": 0,
+      "embedding_tokens": 19,
+      "latency_ms": 160.1
+    },
+    {
+      "id": "semantic_02",
+      "query": "不考虑给买家的优惠，按标价卖掉这些货本来该收多少钱？",
+      "expected_id": "metric_gross",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_gross",
+        "metric_discount",
+        "fewshot_discount_product",
+        "metric_sales",
+        "rule_profit"
+      ],
+      "rank": 1,
+      "embedding_tokens": 19,
+      "latency_ms": 174.62
+    },
+    {
+      "id": "semantic_03",
+      "query": "一共给买家让利了多少钱，应该用什么公式？",
+      "expected_id": "metric_discount",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_country",
+        "fewshot_aov_country",
+        "fewshot_category",
+        "fewshot_inventory",
+        "fewshot_top_customers"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.49
+    },
+    {
+      "id": "semantic_03",
+      "query": "一共给买家让利了多少钱，应该用什么公式？",
+      "expected_id": "metric_discount",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_country",
+        "schema_products",
+        "schema_orders",
+        "schema_employees",
+        "schema_categories"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 2.04
+    },
+    {
+      "id": "semantic_03",
+      "query": "一共给买家让利了多少钱，应该用什么公式？",
+      "expected_id": "metric_discount",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_discount_product",
+        "fewshot_aov_country",
+        "metric_discount",
+        "metric_gross",
+        "fewshot_freight_country"
+      ],
+      "rank": 3,
+      "embedding_tokens": 14,
+      "latency_ms": 166.78
+    },
+    {
+      "id": "semantic_03",
+      "query": "一共给买家让利了多少钱，应该用什么公式？",
+      "expected_id": "metric_discount",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_discount",
+        "metric_gross",
+        "metric_sales",
+        "rule_profit",
+        "fewshot_discount_product"
+      ],
+      "rank": 1,
+      "embedding_tokens": 14,
+      "latency_ms": 133.05
+    },
+    {
+      "id": "semantic_04",
+      "query": "一张单子里有多种商品，数交易笔数时怎么不重复算？",
+      "expected_id": "metric_orders",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "rule_profit",
+        "fewshot_discount_product",
+        "fewshot_stock_value",
+        "fewshot_top_products",
+        "fewshot_quarter"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.53
+    },
+    {
+      "id": "semantic_04",
+      "query": "一张单子里有多种商品，数交易笔数时怎么不重复算？",
+      "expected_id": "metric_orders",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_profit",
+        "fewshot_quarter",
+        "fewshot_monthly",
+        "rule_date",
+        "fewshot_stock_value"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.56
+    },
+    {
+      "id": "semantic_04",
+      "query": "一张单子里有多种商品，数交易笔数时怎么不重复算？",
+      "expected_id": "metric_orders",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_discount_product",
+        "metric_aov",
+        "fewshot_stock_value",
+        "fewshot_inventory",
+        "fewshot_repeat"
+      ],
+      "rank": 0,
+      "embedding_tokens": 18,
+      "latency_ms": 211.44
+    },
+    {
+      "id": "semantic_04",
+      "query": "一张单子里有多种商品，数交易笔数时怎么不重复算？",
+      "expected_id": "metric_orders",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_orders",
+        "metric_quantity",
+        "rule_inventory",
+        "metric_aov",
+        "metric_sales"
+      ],
+      "rank": 1,
+      "embedding_tokens": 18,
+      "latency_ms": 164.68
+    },
+    {
+      "id": "semantic_05",
+      "query": "顾客下单到仓库把货发走，通常隔了多少天？",
+      "expected_id": "metric_shipping",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_inventory",
+        "fewshot_aov_country",
+        "fewshot_freight_country",
+        "fewshot_employee",
+        "fewshot_category"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.39
+    },
+    {
+      "id": "semantic_05",
+      "query": "顾客下单到仓库把货发走，通常隔了多少天？",
+      "expected_id": "metric_shipping",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_inventory",
+        "view_v_inventory_status",
+        "rule_date",
+        "schema_shippers",
+        "rule_country"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.64
+    },
+    {
+      "id": "semantic_05",
+      "query": "顾客下单到仓库把货发走，通常隔了多少天？",
+      "expected_id": "metric_shipping",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_shipping",
+        "fewshot_inventory",
+        "fewshot_freight_country",
+        "metric_inventory",
+        "fewshot_stock_value"
+      ],
+      "rank": 0,
+      "embedding_tokens": 15,
+      "latency_ms": 151.54
+    },
+    {
+      "id": "semantic_05",
+      "query": "顾客下单到仓库把货发走，通常隔了多少天？",
+      "expected_id": "metric_shipping",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_shipping",
+        "fewshot_shipping",
+        "metric_on_time",
+        "metric_inventory",
+        "rule_inventory"
+      ],
+      "rank": 1,
+      "embedding_tokens": 15,
+      "latency_ms": 430.17
+    },
+    {
+      "id": "semantic_06",
+      "query": "已经寄出去的货，有多大比例没超过承诺的发出日期？",
+      "expected_id": "metric_on_time",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "view_v_order_line_sales",
+        "fewshot_quarter",
+        "metric_aov",
+        "metric_freight",
+        "metric_sales"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.41
+    },
+    {
+      "id": "semantic_06",
+      "query": "已经寄出去的货，有多大比例没超过承诺的发出日期？",
+      "expected_id": "metric_on_time",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "metric_sales",
+        "schema_order_details",
+        "schema_shippers",
+        "schema_customers",
+        "schema_suppliers"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 2.05
+    },
+    {
+      "id": "semantic_06",
+      "query": "已经寄出去的货，有多大比例没超过承诺的发出日期？",
+      "expected_id": "metric_on_time",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_shipping",
+        "fewshot_freight_country",
+        "fewshot_inventory",
+        "metric_freight",
+        "view_v_order_line_sales"
+      ],
+      "rank": 0,
+      "embedding_tokens": 16,
+      "latency_ms": 169.74
+    },
+    {
+      "id": "semantic_06",
+      "query": "已经寄出去的货，有多大比例没超过承诺的发出日期？",
+      "expected_id": "metric_on_time",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_on_time",
+        "fewshot_shipping",
+        "metric_shipping",
+        "rule_freight",
+        "metric_freight"
+      ],
+      "rank": 1,
+      "embedding_tokens": 16,
+      "latency_ms": 143.01
+    },
+    {
+      "id": "semantic_07",
+      "query": "寄送这些货花的钱占成交金额的比例怎么算？",
+      "expected_id": "metric_freight",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_category",
+        "fewshot_country",
+        "fewshot_top_customers",
+        "metric_discount",
+        "fewshot_discount_product"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.75
+    },
+    {
+      "id": "semantic_07",
+      "query": "寄送这些货花的钱占成交金额的比例怎么算？",
+      "expected_id": "metric_freight",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "metric_quantity",
+        "metric_discount",
+        "rule_employee",
+        "fewshot_top_customers",
+        "schema_employees"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.35
+    },
+    {
+      "id": "semantic_07",
+      "query": "寄送这些货花的钱占成交金额的比例怎么算？",
+      "expected_id": "metric_freight",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_freight_country",
+        "fewshot_aov_country",
+        "fewshot_shipping",
+        "metric_freight",
+        "fewshot_discount_product"
+      ],
+      "rank": 4,
+      "embedding_tokens": 14,
+      "latency_ms": 218.06
+    },
+    {
+      "id": "semantic_07",
+      "query": "寄送这些货花的钱占成交金额的比例怎么算？",
+      "expected_id": "metric_freight",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "metric_freight",
+        "metric_on_time",
+        "rule_freight",
+        "fewshot_freight_country",
+        "fewshot_shipping"
+      ],
+      "rank": 1,
+      "embedding_tokens": 14,
+      "latency_ms": 140.2
+    },
+    {
+      "id": "semantic_08",
+      "query": "哪些还在卖的货快卖光了，需要尽快进一批？",
+      "expected_id": "metric_inventory",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_aov_country",
+        "fewshot_category",
+        "fewshot_country",
+        "fewshot_discount_product",
+        "fewshot_inventory"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.56
+    },
+    {
+      "id": "semantic_08",
+      "query": "哪些还在卖的货快卖光了，需要尽快进一批？",
+      "expected_id": "metric_inventory",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "schema_employees",
+        "rule_employee",
+        "metric_quantity",
+        "metric_sales",
+        "fewshot_aov_country"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.63
+    },
+    {
+      "id": "semantic_08",
+      "query": "哪些还在卖的货快卖光了，需要尽快进一批？",
+      "expected_id": "metric_inventory",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_inventory",
+        "view_v_inventory_status",
+        "fewshot_discount_product",
+        "fewshot_stock_value",
+        "fewshot_category"
+      ],
+      "rank": 0,
+      "embedding_tokens": 16,
+      "latency_ms": 187.92
+    },
+    {
+      "id": "semantic_08",
+      "query": "哪些还在卖的货快卖光了，需要尽快进一批？",
+      "expected_id": "metric_inventory",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "fewshot_inventory",
+        "rule_inventory",
+        "metric_inventory",
+        "fewshot_stock_value",
+        "metric_quantity"
+      ],
+      "rank": 3,
+      "embedding_tokens": 16,
+      "latency_ms": 239.16
+    },
+    {
+      "id": "semantic_09",
+      "query": "能不能用这个库算扣掉进货成本之后究竟赚了多少？",
+      "expected_id": "rule_profit",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_inventory",
+        "fewshot_category",
+        "fewshot_freight_country",
+        "fewshot_stock_value",
+        "fewshot_shipping"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 4.88
+    },
+    {
+      "id": "semantic_09",
+      "query": "能不能用这个库算扣掉进货成本之后究竟赚了多少？",
+      "expected_id": "rule_profit",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_stock_value",
+        "fewshot_inventory",
+        "fewshot_shipping",
+        "rule_profit",
+        "fewshot_top_products"
+      ],
+      "rank": 4,
+      "embedding_tokens": 0,
+      "latency_ms": 1.82
+    },
+    {
+      "id": "semantic_09",
+      "query": "能不能用这个库算扣掉进货成本之后究竟赚了多少？",
+      "expected_id": "rule_profit",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_discount_product",
+        "fewshot_inventory",
+        "fewshot_stock_value",
+        "metric_gross",
+        "metric_aov"
+      ],
+      "rank": 0,
+      "embedding_tokens": 15,
+      "latency_ms": 181.66
+    },
+    {
+      "id": "semantic_09",
+      "query": "能不能用这个库算扣掉进货成本之后究竟赚了多少？",
+      "expected_id": "rule_profit",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_profit",
+        "metric_sales",
+        "rule_inventory",
+        "fewshot_stock_value",
+        "fewshot_discount_product"
+      ],
+      "rank": 1,
+      "embedding_tokens": 15,
+      "latency_ms": 157.43
+    },
+    {
+      "id": "semantic_10",
+      "query": "想看去年某一天仓库还剩多少件，这个库能支持吗？",
+      "expected_id": "rule_inventory",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_employee",
+        "fewshot_inventory",
+        "fewshot_aov_country",
+        "fewshot_category",
+        "fewshot_country"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.51
+    },
+    {
+      "id": "semantic_10",
+      "query": "想看去年某一天仓库还剩多少件，这个库能支持吗？",
+      "expected_id": "rule_inventory",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_employee",
+        "fewshot_inventory",
+        "fewshot_shipping",
+        "fewshot_quarter",
+        "fewshot_supplier"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.69
+    },
+    {
+      "id": "semantic_10",
+      "query": "想看去年某一天仓库还剩多少件，这个库能支持吗？",
+      "expected_id": "rule_inventory",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_inventory",
+        "fewshot_stock_value",
+        "metric_inventory",
+        "fewshot_shipping",
+        "fewshot_aov_country"
+      ],
+      "rank": 0,
+      "embedding_tokens": 18,
+      "latency_ms": 145.59
+    },
+    {
+      "id": "semantic_10",
+      "query": "想看去年某一天仓库还剩多少件，这个库能支持吗？",
+      "expected_id": "rule_inventory",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_inventory",
+        "fewshot_stock_value",
+        "fewshot_inventory",
+        "metric_inventory",
+        "metric_orders"
+      ],
+      "rank": 1,
+      "embedding_tokens": 18,
+      "latency_ms": 245.45
+    },
+    {
+      "id": "semantic_11",
+      "query": "把一张交易拆成多条商品记录后，快递支出怎么避免被算好几遍？",
+      "expected_id": "rule_freight",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_category",
+        "fewshot_discount_product",
+        "fewshot_aov_country",
+        "fewshot_country",
+        "fewshot_quarter"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.53
+    },
+    {
+      "id": "semantic_11",
+      "query": "把一张交易拆成多条商品记录后，快递支出怎么避免被算好几遍？",
+      "expected_id": "rule_freight",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_category",
+        "fewshot_top_products",
+        "view_v_product_sales",
+        "fewshot_discount_product",
+        "fewshot_quarter"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 2.3
+    },
+    {
+      "id": "semantic_11",
+      "query": "把一张交易拆成多条商品记录后，快递支出怎么避免被算好几遍？",
+      "expected_id": "rule_freight",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_discount_product",
+        "fewshot_aov_country",
+        "fewshot_freight_country",
+        "metric_freight",
+        "metric_aov"
+      ],
+      "rank": 0,
+      "embedding_tokens": 22,
+      "latency_ms": 146.82
+    },
+    {
+      "id": "semantic_11",
+      "query": "把一张交易拆成多条商品记录后，快递支出怎么避免被算好几遍？",
+      "expected_id": "rule_freight",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_freight",
+        "metric_freight",
+        "fewshot_discount_product",
+        "metric_sales",
+        "schema_order_details"
+      ],
+      "rank": 1,
+      "embedding_tokens": 22,
+      "latency_ms": 155.75
+    },
+    {
+      "id": "semantic_12",
+      "query": "收货地址所在国家和买家登记的国家不同，统计地区业绩应该选哪个？",
+      "expected_id": "rule_country",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "schema_orders",
+        "fewshot_country",
+        "fewshot_category",
+        "fewshot_aov_country",
+        "fewshot_monthly"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.38
+    },
+    {
+      "id": "semantic_12",
+      "query": "收货地址所在国家和买家登记的国家不同，统计地区业绩应该选哪个？",
+      "expected_id": "rule_country",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "fewshot_country",
+        "fewshot_category",
+        "schema_orders",
+        "fewshot_monthly",
+        "fewshot_aov_country"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.39
+    },
+    {
+      "id": "semantic_12",
+      "query": "收货地址所在国家和买家登记的国家不同，统计地区业绩应该选哪个？",
+      "expected_id": "rule_country",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "rule_country",
+        "fewshot_country",
+        "fewshot_aov_country",
+        "fewshot_freight_country",
+        "fewshot_shipping"
+      ],
+      "rank": 1,
+      "embedding_tokens": 20,
+      "latency_ms": 192.19
+    },
+    {
+      "id": "semantic_12",
+      "query": "收货地址所在国家和买家登记的国家不同，统计地区业绩应该选哪个？",
+      "expected_id": "rule_country",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_country",
+        "fewshot_country",
+        "fewshot_freight_country",
+        "fewshot_aov_country",
+        "metric_shipping"
+      ],
+      "rank": 1,
+      "embedding_tokens": 20,
+      "latency_ms": 174.69
+    },
+    {
+      "id": "semantic_13",
+      "query": "图表上的这些数额，我能直接在后面加上美元符号吗？",
+      "expected_id": "rule_currency",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_repeat",
+        "fewshot_discount_product",
+        "fewshot_inventory",
+        "fewshot_top_products",
+        "fewshot_top_customers"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.82
+    },
+    {
+      "id": "semantic_13",
+      "query": "图表上的这些数额，我能直接在后面加上美元符号吗？",
+      "expected_id": "rule_currency",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_discount",
+        "rule_cancel",
+        "fewshot_repeat",
+        "view_v_order_line_sales",
+        "rule_employee"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.46
+    },
+    {
+      "id": "semantic_13",
+      "query": "图表上的这些数额，我能直接在后面加上美元符号吗？",
+      "expected_id": "rule_currency",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_aov_country",
+        "fewshot_discount_product",
+        "fewshot_freight_country",
+        "fewshot_country",
+        "fewshot_stock_value"
+      ],
+      "rank": 0,
+      "embedding_tokens": 15,
+      "latency_ms": 197.44
+    },
+    {
+      "id": "semantic_13",
+      "query": "图表上的这些数额，我能直接在后面加上美元符号吗？",
+      "expected_id": "rule_currency",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_currency",
+        "metric_sales",
+        "rule_profit",
+        "metric_quantity",
+        "fewshot_aov_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 15,
+      "latency_ms": 146.66
+    },
+    {
+      "id": "semantic_14",
+      "query": "想剔除被撤销的交易再分析，库里有没有这样的标记？",
+      "expected_id": "rule_cancel",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "view_v_inventory_status",
+        "fewshot_monthly",
+        "rule_inventory",
+        "fewshot_aov_country",
+        "metric_aov"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.67
+    },
+    {
+      "id": "semantic_14",
+      "query": "想剔除被撤销的交易再分析，库里有没有这样的标记？",
+      "expected_id": "rule_cancel",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "view_v_product_sales",
+        "metric_aov",
+        "fewshot_monthly",
+        "view_v_inventory_status",
+        "rule_employee"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.62
+    },
+    {
+      "id": "semantic_14",
+      "query": "想剔除被撤销的交易再分析，库里有没有这样的标记？",
+      "expected_id": "rule_cancel",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "rule_inventory",
+        "view_v_inventory_status",
+        "fewshot_stock_value",
+        "fewshot_inventory",
+        "metric_aov"
+      ],
+      "rank": 0,
+      "embedding_tokens": 16,
+      "latency_ms": 166.62
+    },
+    {
+      "id": "semantic_14",
+      "query": "想剔除被撤销的交易再分析，库里有没有这样的标记？",
+      "expected_id": "rule_cancel",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_cancel",
+        "rule_inventory",
+        "view_v_customer_sales",
+        "view_v_order_line_sales",
+        "view_v_product_sales"
+      ],
+      "rank": 1,
+      "embedding_tokens": 16,
+      "latency_ms": 177.28
+    },
+    {
+      "id": "semantic_15",
+      "query": "销售人员的工资和奖金能从这个样例库里查出来吗？",
+      "expected_id": "rule_employee",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "rule_inventory",
+        "fewshot_inventory",
+        "metric_sales",
+        "rule_employee",
+        "schema_employees"
+      ],
+      "rank": 4,
+      "embedding_tokens": 0,
+      "latency_ms": 3.06
+    },
+    {
+      "id": "semantic_15",
+      "query": "销售人员的工资和奖金能从这个样例库里查出来吗？",
+      "expected_id": "rule_employee",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "view_v_inventory_status",
+        "fewshot_inventory",
+        "rule_cancel",
+        "rule_profit",
+        "view_v_product_sales"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.51
+    },
+    {
+      "id": "semantic_15",
+      "query": "销售人员的工资和奖金能从这个样例库里查出来吗？",
+      "expected_id": "rule_employee",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "rule_inventory",
+        "metric_sales",
+        "metric_quantity",
+        "schema_employees",
+        "rule_employee"
+      ],
+      "rank": 5,
+      "embedding_tokens": 16,
+      "latency_ms": 153.22
+    },
+    {
+      "id": "semantic_15",
+      "query": "销售人员的工资和奖金能从这个样例库里查出来吗？",
+      "expected_id": "rule_employee",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_inventory",
+        "view_v_order_line_sales",
+        "metric_sales",
+        "view_v_product_sales",
+        "view_v_customer_sales"
+      ],
+      "rank": 0,
+      "embedding_tokens": 16,
+      "latency_ms": 161.97
+    },
+    {
+      "id": "semantic_16",
+      "query": "这个演示数据究竟是哪几年的交易？",
+      "expected_id": "rule_date",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_employee",
+        "metric_gross",
+        "fewshot_aov_country",
+        "schema_customers",
+        "fewshot_category"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.76
+    },
+    {
+      "id": "semantic_16",
+      "query": "这个演示数据究竟是哪几年的交易？",
+      "expected_id": "rule_date",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "schema_customers",
+        "metric_quantity",
+        "schema_employees",
+        "schema_order_details",
+        "rule_inventory"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.79
+    },
+    {
+      "id": "semantic_16",
+      "query": "这个演示数据究竟是哪几年的交易？",
+      "expected_id": "rule_date",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_quarter",
+        "fewshot_monthly",
+        "fewshot_aov_country",
+        "rule_date",
+        "fewshot_category"
+      ],
+      "rank": 4,
+      "embedding_tokens": 10,
+      "latency_ms": 152.9
+    },
+    {
+      "id": "semantic_16",
+      "query": "这个演示数据究竟是哪几年的交易？",
+      "expected_id": "rule_date",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_date",
+        "rule_inventory",
+        "schema_customers",
+        "schema_order_details",
+        "view_v_customer_sales"
+      ],
+      "rank": 1,
+      "embedding_tokens": 10,
+      "latency_ms": 139.73
+    },
+    {
+      "id": "semantic_17",
+      "query": "负责把货送出去的公司，其联系电话保存在什么表？",
+      "expected_id": "schema_shippers",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "metric_inventory",
+        "metric_discount",
+        "metric_freight",
+        "fewshot_stock_value",
+        "fewshot_top_customers"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 3.61
+    },
+    {
+      "id": "semantic_17",
+      "query": "负责把货送出去的公司，其联系电话保存在什么表？",
+      "expected_id": "schema_shippers",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "view_v_inventory_status",
+        "metric_inventory",
+        "rule_discount",
+        "metric_discount",
+        "metric_freight"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 2.61
+    },
+    {
+      "id": "semantic_17",
+      "query": "负责把货送出去的公司，其联系电话保存在什么表？",
+      "expected_id": "schema_shippers",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_inventory",
+        "fewshot_shipping",
+        "metric_inventory",
+        "metric_freight",
+        "fewshot_aov_country"
+      ],
+      "rank": 0,
+      "embedding_tokens": 16,
+      "latency_ms": 159.58
+    },
+    {
+      "id": "semantic_17",
+      "query": "负责把货送出去的公司，其联系电话保存在什么表？",
+      "expected_id": "schema_shippers",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "schema_shippers",
+        "rule_customer",
+        "schema_suppliers",
+        "schema_customers",
+        "schema_orders"
+      ],
+      "rank": 1,
+      "embedding_tokens": 16,
+      "latency_ms": 160.75
+    },
+    {
+      "id": "semantic_18",
+      "query": "我想找进货合作方的公司名称和所在城市，该查哪个表？",
+      "expected_id": "schema_suppliers",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "fewshot_category",
+        "fewshot_inventory",
+        "fewshot_monthly",
+        "fewshot_stock_value",
+        "fewshot_top_products"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 4.32
+    },
+    {
+      "id": "semantic_18",
+      "query": "我想找进货合作方的公司名称和所在城市，该查哪个表？",
+      "expected_id": "schema_suppliers",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "metric_quantity",
+        "view_v_inventory_status",
+        "view_v_order_summary",
+        "rule_cancel",
+        "schema_categories"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 2.55
+    },
+    {
+      "id": "semantic_18",
+      "query": "我想找进货合作方的公司名称和所在城市，该查哪个表？",
+      "expected_id": "schema_suppliers",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "fewshot_inventory",
+        "fewshot_supplier",
+        "metric_inventory",
+        "fewshot_stock_value",
+        "fewshot_aov_country"
+      ],
+      "rank": 0,
+      "embedding_tokens": 18,
+      "latency_ms": 152.32
+    },
+    {
+      "id": "semantic_18",
+      "query": "我想找进货合作方的公司名称和所在城市，该查哪个表？",
+      "expected_id": "schema_suppliers",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "schema_suppliers",
+        "schema_shippers",
+        "schema_customers",
+        "rule_customer",
+        "schema_products"
+      ],
+      "rank": 1,
+      "embedding_tokens": 18,
+      "latency_ms": 160.55
+    },
+    {
+      "id": "semantic_19",
+      "query": "有没有一行对应一笔交易、已经汇总好货款和件数的视图？",
+      "expected_id": "view_v_order_summary",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "view_v_order_line_sales",
+        "view_v_customer_sales",
+        "fewshot_category",
+        "view_v_order_summary",
+        "view_v_inventory_status"
+      ],
+      "rank": 4,
+      "embedding_tokens": 0,
+      "latency_ms": 3.94
+    },
+    {
+      "id": "semantic_19",
+      "query": "有没有一行对应一笔交易、已经汇总好货款和件数的视图？",
+      "expected_id": "view_v_order_summary",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "schema_customers",
+        "schema_categories",
+        "view_v_customer_sales",
+        "schema_suppliers",
+        "view_v_order_line_sales"
+      ],
+      "rank": 0,
+      "embedding_tokens": 0,
+      "latency_ms": 1.66
+    },
+    {
+      "id": "semantic_19",
+      "query": "有没有一行对应一笔交易、已经汇总好货款和件数的视图？",
+      "expected_id": "view_v_order_summary",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "view_v_order_line_sales",
+        "view_v_product_sales",
+        "view_v_inventory_status",
+        "view_v_order_summary",
+        "view_v_customer_sales"
+      ],
+      "rank": 4,
+      "embedding_tokens": 19,
+      "latency_ms": 161.47
+    },
+    {
+      "id": "semantic_19",
+      "query": "有没有一行对应一笔交易、已经汇总好货款和件数的视图？",
+      "expected_id": "view_v_order_summary",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "view_v_product_sales",
+        "view_v_order_summary",
+        "view_v_order_line_sales",
+        "view_v_customer_sales",
+        "view_v_inventory_status"
+      ],
+      "rank": 2,
+      "embedding_tokens": 19,
+      "latency_ms": 144.76
+    },
+    {
+      "id": "semantic_20",
+      "query": "报表中买家的名字应该显示公司名称还是那串编码？",
+      "expected_id": "rule_customer",
+      "group": "paraphrase",
+      "variant": "hash256_hybrid",
+      "ids": [
+        "rule_customer",
+        "fewshot_shipping",
+        "fewshot_inventory",
+        "fewshot_monthly",
+        "fewshot_stock_value"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 3.05
+    },
+    {
+      "id": "semantic_20",
+      "query": "报表中买家的名字应该显示公司名称还是那串编码？",
+      "expected_id": "rule_customer",
+      "group": "paraphrase",
+      "variant": "hash256_vector",
+      "ids": [
+        "rule_customer",
+        "rule_freight",
+        "view_v_inventory_status",
+        "fewshot_shipping",
+        "rule_profit"
+      ],
+      "rank": 1,
+      "embedding_tokens": 0,
+      "latency_ms": 1.67
+    },
+    {
+      "id": "semantic_20",
+      "query": "报表中买家的名字应该显示公司名称还是那串编码？",
+      "expected_id": "rule_customer",
+      "group": "paraphrase",
+      "variant": "semantic_hybrid",
+      "ids": [
+        "rule_customer",
+        "fewshot_top_customers",
+        "fewshot_inventory",
+        "fewshot_repeat",
+        "fewshot_aov_country"
+      ],
+      "rank": 1,
+      "embedding_tokens": 14,
+      "latency_ms": 153.19
+    },
+    {
+      "id": "semantic_20",
+      "query": "报表中买家的名字应该显示公司名称还是那串编码？",
+      "expected_id": "rule_customer",
+      "group": "paraphrase",
+      "variant": "semantic_vector",
+      "ids": [
+        "rule_customer",
+        "schema_shippers",
+        "schema_customers",
+        "rule_currency",
+        "schema_suppliers"
+      ],
+      "rank": 1,
+      "embedding_tokens": 14,
+      "latency_ms": 168.52
+    }
+  ],
+  "metrics": {
+    "hash256_hybrid": {
+      "all": {
+        "count": 32,
+        "recall_at_1": 0.3125,
+        "recall_at_5": 0.4375,
+        "mrr_at_5": 0.3516,
+        "mean_latency_ms": 3.49,
+        "embedding_tokens": 0
+      },
+      "legacy": {
+        "count": 12,
+        "recall_at_1": 0.75,
+        "recall_at_5": 0.9167,
+        "mrr_at_5": 0.8125,
+        "mean_latency_ms": 3.29,
+        "embedding_tokens": 0
+      },
+      "paraphrase": {
+        "count": 20,
+        "recall_at_1": 0.05,
+        "recall_at_5": 0.15,
+        "mrr_at_5": 0.075,
+        "mean_latency_ms": 3.62,
+        "embedding_tokens": 0
+      }
+    },
+    "hash256_vector": {
+      "all": {
+        "count": 32,
+        "recall_at_1": 0.2188,
+        "recall_at_5": 0.4062,
+        "mrr_at_5": 0.2943,
+        "mean_latency_ms": 1.73,
+        "embedding_tokens": 0
+      },
+      "legacy": {
+        "count": 12,
+        "recall_at_1": 0.5,
+        "recall_at_5": 0.9167,
+        "mrr_at_5": 0.6806,
+        "mean_latency_ms": 1.66,
+        "embedding_tokens": 0
+      },
+      "paraphrase": {
+        "count": 20,
+        "recall_at_1": 0.05,
+        "recall_at_5": 0.1,
+        "mrr_at_5": 0.0625,
+        "mean_latency_ms": 1.77,
+        "embedding_tokens": 0
+      }
+    },
+    "semantic_hybrid": {
+      "all": {
+        "count": 32,
+        "recall_at_1": 0.3438,
+        "recall_at_5": 0.625,
+        "mrr_at_5": 0.4464,
+        "mean_latency_ms": 177.54,
+        "embedding_tokens": 405
+      },
+      "legacy": {
+        "count": 12,
+        "recall_at_1": 0.75,
+        "recall_at_5": 1.0,
+        "mrr_at_5": 0.875,
+        "mean_latency_ms": 190.06,
+        "embedding_tokens": 77
+      },
+      "paraphrase": {
+        "count": 20,
+        "recall_at_1": 0.1,
+        "recall_at_5": 0.4,
+        "mrr_at_5": 0.1892,
+        "mean_latency_ms": 170.03,
+        "embedding_tokens": 328
+      }
+    },
+    "semantic_vector": {
+      "all": {
+        "count": 32,
+        "recall_at_1": 0.9062,
+        "recall_at_5": 0.9688,
+        "mrr_at_5": 0.9323,
+        "mean_latency_ms": 172.12,
+        "embedding_tokens": 405
+      },
+      "legacy": {
+        "count": 12,
+        "recall_at_1": 1.0,
+        "recall_at_5": 1.0,
+        "mrr_at_5": 1.0,
+        "mean_latency_ms": 160.09,
+        "embedding_tokens": 77
+      },
+      "paraphrase": {
+        "count": 20,
+        "recall_at_1": 0.85,
+        "recall_at_5": 0.95,
+        "mrr_at_5": 0.8917,
+        "mean_latency_ms": 179.33,
+        "embedding_tokens": 328
+      }
+    }
+  }
+}

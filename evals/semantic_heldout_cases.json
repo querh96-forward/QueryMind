@@ -1,0 +1,18 @@
+[
+  {"id":"heldout_01","query":"单位售价乘卖出件数后还要扣掉优惠，最后实际成交的金额对应哪个指标？","expected_id":"metric_sales"},
+  {"id":"heldout_02","query":"我想知道总共卖出了多少件货，而不是收了多少钱，该汇总哪个字段？","expected_id":"metric_quantity"},
+  {"id":"heldout_03","query":"每笔买卖平均带来多少进账，分母该用交易笔数还是客户人数？","expected_id":"metric_aov"},
+  {"id":"heldout_04","query":"订单还没寄出的情况下，是否应该纳入从下单到出库所需天数的平均值？","expected_id":"metric_shipping"},
+  {"id":"heldout_05","query":"物流花费占这一单收入的比重，在收入为零的时候如何处理？","expected_id":"metric_freight"},
+  {"id":"heldout_06","query":"剩余货量已经到达补充阈值，但已经停止销售的商品也该提醒采购吗？","expected_id":"metric_inventory"},
+  {"id":"heldout_07","query":"我需要每个买家的购买次数、累计消费和每次平均消费，有现成的汇总视图吗？","expected_id":"view_v_customer_sales"},
+  {"id":"heldout_08","query":"哪个视图已经把存货分成停卖、急需进货、偏少和充足这些档位？","expected_id":"view_v_inventory_status"},
+  {"id":"heldout_09","query":"哪份明细视图把买家、负责销售的人、货品及分类都关联好了？","expected_id":"view_v_order_line_sales"},
+  {"id":"heldout_10","query":"每笔交易内的每种货品用什么组合唯一标识，同时哪里记录购买件数和优惠比例？","expected_id":"schema_order_details"},
+  {"id":"heldout_11","query":"负责销售的人的姓名和入职时间存放在哪个数据表？","expected_id":"schema_employees"},
+  {"id":"heldout_12","query":"这个数据库有没有足够的进货成本信息让我计算毛利率？","expected_id":"rule_profit"},
+  {"id":"heldout_13","query":"订单和商品明细关联后，同一笔配送费用出现了多行，能直接相加吗？","expected_id":"rule_freight"},
+  {"id":"heldout_14","query":"优惠比例字段写着0.1，是减掉百分之十还是只收原价的十分之一？","expected_id":"rule_discount"},
+  {"id":"heldout_15","query":"产品表里剩余件数是今天的状态，还是能反映过去每天的变化？","expected_id":"rule_inventory"},
+  {"id":"heldout_16","query":"做地域报表时，我想按货实际寄到的地方汇总，不按买家公司注册所在地，该选哪个属性？","expected_id":"rule_country"}
+]

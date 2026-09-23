@@ -1,0 +1,102 @@
+[
+  {
+    "id": "case_01",
+    "question": "每个月的销售额趋势如何？",
+    "reference_sql": "SELECT to_char(order_date, 'YYYY-MM') AS 月份, ROUND(SUM(sales_amount),2) AS 销售额, COUNT(*) AS 订单量 FROM v_order_summary GROUP BY 月份 ORDER BY 月份"
+  },
+  {
+    "id": "case_02",
+    "question": "查看月度订单和销售额趋势",
+    "reference_sql": "SELECT to_char(order_date, 'YYYY-MM') AS 月份, ROUND(SUM(sales_amount),2) AS 销售额, COUNT(*) AS 订单量 FROM v_order_summary GROUP BY 月份 ORDER BY 月份"
+  },
+  {
+    "id": "case_03",
+    "question": "销售额最高的10个商品是什么？",
+    "reference_sql": "SELECT product_name AS 商品, category_name AS 品类, sales_amount AS 销售额, sales_quantity AS 销量 FROM v_product_sales ORDER BY sales_amount DESC LIMIT 10"
+  },
+  {
+    "id": "case_04",
+    "question": "给我商品销售排名",
+    "reference_sql": "SELECT product_name AS 商品, category_name AS 品类, sales_amount AS 销售额, sales_quantity AS 销量 FROM v_product_sales ORDER BY sales_amount DESC LIMIT 10"
+  },
+  {
+    "id": "case_05",
+    "question": "哪些客户贡献了最多收入？",
+    "reference_sql": "SELECT company_name AS 客户, country AS 国家, sales_amount AS 销售额, order_count AS 订单量, avg_order_value AS 客单价 FROM v_customer_sales ORDER BY sales_amount DESC LIMIT 10"
+  },
+  {
+    "id": "case_06",
+    "question": "客户销售额排名",
+    "reference_sql": "SELECT company_name AS 客户, country AS 国家, sales_amount AS 销售额, order_count AS 订单量, avg_order_value AS 客单价 FROM v_customer_sales ORDER BY sales_amount DESC LIMIT 10"
+  },
+  {
+    "id": "case_07",
+    "question": "各商品品类销售额怎么样？",
+    "reference_sql": "SELECT category_name AS 品类, ROUND(SUM(sales_amount),2) AS 销售额, SUM(quantity) AS 销量 FROM v_order_line_sales GROUP BY category_name ORDER BY 销售额 DESC"
+  },
+  {
+    "id": "case_08",
+    "question": "查看品类销量和销售额",
+    "reference_sql": "SELECT category_name AS 品类, ROUND(SUM(sales_amount),2) AS 销售额, SUM(quantity) AS 销量 FROM v_order_line_sales GROUP BY category_name ORDER BY 销售额 DESC"
+  },
+  {
+    "id": "case_09",
+    "question": "不同国家的销售额排名",
+    "reference_sql": "SELECT ship_country AS 国家, ROUND(SUM(sales_amount),2) AS 销售额, COUNT(*) AS 订单量 FROM v_order_summary GROUP BY ship_country ORDER BY 销售额 DESC LIMIT 15"
+  },
+  {
+    "id": "case_10",
+    "question": "地区销售分布如何？",
+    "reference_sql": "SELECT ship_country AS 国家, ROUND(SUM(sales_amount),2) AS 销售额, COUNT(*) AS 订单量 FROM v_order_summary GROUP BY ship_country ORDER BY 销售额 DESC LIMIT 15"
+  },
+  {
+    "id": "case_11",
+    "question": "目前有哪些商品存在补货风险？",
+    "reference_sql": "SELECT product_name AS 商品, category_name AS 品类, units_in_stock AS 库存, units_on_order AS 在途, reorder_level AS 补货点, inventory_status AS 状态 FROM v_inventory_status WHERE inventory_status <> '库存正常' ORDER BY 库存"
+  },
+  {
+    "id": "case_12",
+    "question": "查看库存偏低和需要补货的商品",
+    "reference_sql": "SELECT product_name AS 商品, category_name AS 品类, units_in_stock AS 库存, units_on_order AS 在途, reorder_level AS 补货点, inventory_status AS 状态 FROM v_inventory_status WHERE inventory_status <> '库存正常' ORDER BY 库存"
+  },
+  {
+    "id": "case_13",
+    "question": "销售员工的销售额排名",
+    "reference_sql": "SELECT employee_name AS 销售员工, ROUND(SUM(sales_amount),2) AS 销售额, COUNT(*) AS 订单量 FROM v_order_summary GROUP BY employee_name ORDER BY 销售额 DESC"
+  },
+  {
+    "id": "case_14",
+    "question": "各销售员的业绩怎么样？",
+    "reference_sql": "SELECT employee_name AS 销售员工, ROUND(SUM(sales_amount),2) AS 销售额, COUNT(*) AS 订单量 FROM v_order_summary GROUP BY employee_name ORDER BY 销售额 DESC"
+  },
+  {
+    "id": "case_15",
+    "question": "平均发货时长和按期发货率是多少？",
+    "reference_sql": "SELECT ROUND(AVG(shipping_days),2) AS 平均发货天数, ROUND(AVG(on_time)*100,2) AS 按期发货率, COUNT(*) AS 订单量 FROM v_order_summary WHERE shipped_date IS NOT NULL"
+  },
+  {
+    "id": "case_16",
+    "question": "履约准时情况如何？",
+    "reference_sql": "SELECT ROUND(AVG(shipping_days),2) AS 平均发货天数, ROUND(AVG(on_time)*100,2) AS 按期发货率, COUNT(*) AS 订单量 FROM v_order_summary WHERE shipped_date IS NOT NULL"
+  },
+  {
+    "id": "case_17",
+    "question": "各国运费率是多少？",
+    "reference_sql": "SELECT ship_country AS 国家, ROUND(SUM(freight),2) AS 运费, ROUND(SUM(sales_amount),2) AS 销售额, ROUND(SUM(freight)/SUM(sales_amount)*100,2) AS 运费率 FROM v_order_summary GROUP BY ship_country ORDER BY 运费率 DESC"
+  },
+  {
+    "id": "case_18",
+    "question": "哪些地区物流运费占比最高？",
+    "reference_sql": "SELECT ship_country AS 国家, ROUND(SUM(freight),2) AS 运费, ROUND(SUM(sales_amount),2) AS 销售额, ROUND(SUM(freight)/SUM(sales_amount)*100,2) AS 运费率 FROM v_order_summary GROUP BY ship_country ORDER BY 运费率 DESC"
+  },
+  {
+    "id": "case_19",
+    "question": "整体经营情况怎么样？",
+    "reference_sql": "SELECT ROUND(SUM(sales_amount),2) AS 销售额, COUNT(*) AS 订单量, ROUND(AVG(sales_amount),2) AS 客单价, ROUND(AVG(on_time)*100,2) AS 按期发货率 FROM v_order_summary"
+  },
+  {
+    "id": "case_20",
+    "question": "给我经营数据总览",
+    "reference_sql": "SELECT ROUND(SUM(sales_amount),2) AS 销售额, COUNT(*) AS 订单量, ROUND(AVG(sales_amount),2) AS 客单价, ROUND(AVG(on_time)*100,2) AS 按期发货率 FROM v_order_summary"
+  }
+]

@@ -1,0 +1,10 @@
+﻿employee_id,first_name,last_name,title,hire_date,city,country,reports_to
+1,Nancy,Davolio,Sales Representative,1992-05-01,Seattle,USA,2
+2,Andrew,Fuller,"Vice President, Sales",1992-08-14,Tacoma,USA,
+3,Janet,Leverling,Sales Representative,1992-04-01,Kirkland,USA,2
+4,Margaret,Peacock,Sales Representative,1993-05-03,Redmond,USA,2
+5,Steven,Buchanan,Sales Manager,1993-10-17,London,UK,2
+6,Michael,Suyama,Sales Representative,1993-10-17,London,UK,5
+7,Robert,King,Sales Representative,1994-01-02,London,UK,5
+8,Laura,Callahan,Inside Sales Coordinator,1994-03-05,Seattle,USA,2
+9,Anne,Dodsworth,Sales Representative,1994-11-15,London,UK,5
