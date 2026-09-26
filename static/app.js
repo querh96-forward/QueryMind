@@ -385,7 +385,19 @@ async function loadSystem() {
 async function loadSource() {
   const data=await api('/api/v1/data-source');
   $('#sourceCard').innerHTML=`<div class="source-main"><h2>${escapeHtml(data.name)} <span class="online-dot"></span></h2><p>${escapeHtml(data.type)} · 只读连接 · 状态${escapeHtml(data.status)}</p></div><div class="source-stat"><strong>${fmt(data.total_rows,0)}</strong><span>核心业务数据行</span></div>`;
-  $('#tableCatalog').innerHTML=Object.entries(data.tables).map(([name,item])=>`<div class="catalog-item"><strong>${escapeHtml(item.label)}</strong><small>${escapeHtml(name)} · ${item.type==='view'?'分析视图':fmt(data.row_counts[name] || 0,0)+' 行'}</small></div>`).join('');
+  const labels = {
+    categories:'商品品类', customers:'客户', employees:'销售员工', orders:'订单',
+    order_details:'订单明细', products:'商品', shippers:'物流商', suppliers:'供应商',
+    v_order_line_sales:'订单销售明细', v_order_summary:'订单汇总',
+    v_product_sales:'商品销售汇总', v_customer_sales:'客户销售汇总',
+    v_inventory_status:'库存状态',
+  };
+  // The API returns schema entries as an array; row_counts covers base tables only.
+  $('#tableCatalog').innerHTML=data.tables.map(({name})=>{
+    const count = data.row_counts[name];
+    const detail = count === undefined ? '分析视图' : `${fmt(count,0)} 行`;
+    return `<div class="catalog-item"><strong>${escapeHtml(labels[name] || name)}</strong><small>${escapeHtml(name)} · ${detail}</small></div>`;
+  }).join('');
 }
 
 async function loadMetrics() {
